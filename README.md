@@ -1,2 +1,2 @@
 # django-djpagan
-Payment processing
+Estimated Billing, Late Fees, Payment processing
