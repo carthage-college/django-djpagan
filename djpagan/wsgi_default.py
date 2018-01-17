@@ -1,12 +1,3 @@
-"""
-WSGI config for djproj project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
-"""
-
 import os
 import time
 import traceback
@@ -21,9 +12,9 @@ sys.path.append('/data2/django_1.11/')
 sys.path.append('/data2/django_projects/')
 sys.path.append('/data2/django_third/')
 # django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djskeletor.settings")
-os.environ.setdefault("PYTHON_EGG_CACHE", "/var/cache/python/.python-eggs")
-os.environ.setdefault("TZ", "America/Chicago")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djpagan.settings')
+os.environ.setdefault('PYTHON_EGG_CACHE', '/var/cache/python/.python-eggs')
+os.environ.setdefault('TZ', 'America/Chicago')
 # informix
 os.environ['INFORMIXSERVER'] = ''
 os.environ['DBSERVERNAME'] = ''
@@ -31,7 +22,7 @@ os.environ['INFORMIXDIR'] = ''
 os.environ['ODBCINI'] = ''
 os.environ['ONCONFIG'] = ''
 os.environ['INFORMIXSQLHOSTS'] = ''
-os.environ['LD_LIBRARY_PATH'] = '$INFORMIXDIR/lib:$INFORMIXDIR/lib/esql:$INFORMIXDIR/lib/tools:/usr/lib/apache2/modules:$INFORMIXDIR/lib/cli'
+os.environ['LD_LIBRARY_PATH'] = ''
 os.environ['LD_RUN_PATH'] = os.environ['LD_LIBRARY_PATH']
 # wsgi
 from django.core.wsgi import get_wsgi_application
