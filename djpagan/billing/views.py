@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from djpagan.billing.forms import SearchTransactionForm
 from djpagan.billing.sql import TRANSACTIONS
+from djpagan.core.utils import get_objects
 
 #from djzbar.decorators.auth import portal_auth_required
 
@@ -17,12 +18,12 @@ def search(request, tipo=None):
 
             stat = ''
             if data['include_voids']:
-                stat = 'AND vch_ref.stat <> "V"'
+                stat = 'AND vch_rec.stat <> "V"'
 
             sql = TRANSACTIONS(
                 vch_ref = data['journal_type'],
                 journal_no = data['journal_number'],
-                stat=stat
+                stat = stat
             )
             objects = get_objects(sql)
     else:
