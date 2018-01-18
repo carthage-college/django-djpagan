@@ -4,6 +4,7 @@
     Carthage College
 {% endblock %}
 {% block extra_style %}
+    {{block.super}}
     <!-- Page-Level Plugin CSS - Tables -->
     <link href="//www.carthage.edu/static/vendor/dashboard/css/plugins/dataTables/jquery.dataTables.min.css"
         rel="stylesheet">
@@ -18,12 +19,7 @@
     table.dataTable tbody th, table.dataTable tbody td { padding: 1px 4px; }
     table.dataTable thead th, table.dataTable thead td { border-bottom: 1px solid #111; padding: 2px 6px; }
     table.dataTable tfoot th, table.dataTable tfoot td { padding: 2px 6px; }
-
-    .form ol li, .form ul li {
-        list-style:none outside none;
-        background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-    }
-</style>
+    </style>
 {% endblock %}
 {% block extra_javascript %}
     <!-- Latest compiled and minified JavaScript -->

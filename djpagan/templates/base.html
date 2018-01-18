@@ -1,23 +1,18 @@
-{% extends "blank.html" %}
-{% block css %}
-    <!-- Core CSS - Include with every page -->
-    <!-- Latest bootstrap compiled and minified CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-        crossorigin="anonymous" rel="stylesheet">
+{# extends "blank.html" #}
+{% extends "djbootmin/base.html" %}
+{% block extra_style %}
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         rel="stylesheet">
-    <link href="//www.carthage.edu/themes/shared/css/forms.css"
+    <link href="https://www.carthage.edu/themes/shared/css/forms.css"
         rel="stylesheet" type="text/css">
-    <link href="//www.carthage.edu/themes/shared/css/tables.css"
+    <link href="https://www.carthage.edu/themes/shared/css/tables.css"
         rel="stylesheet" type="text/css">
     <!-- print CSS -->
-    <link href="//www.carthage.edu/themes/shared/css/print.css"
+    <link href="https://www.carthage.edu/themes/shared/css/print.css"
         rel="stylesheet">
+    <style type="text/css">
+    #page-wrapper{margin:0;padding:0;}
+    .form fieldset {margin-top:0;}
+    </style>
 {% endblock %}
-{% block urchin %}{% endblock %}
-{% block content_head %}{% endblock %}
-
+{% block navigation %}{% endblock %}
