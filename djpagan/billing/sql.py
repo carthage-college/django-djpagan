@@ -40,7 +40,7 @@ AND
 AND
     gle_rec.gle_no = gltr_rec.ent_no
 WHERE
-    vch_rec.vch_ref = {vch_ref}
+    vch_rec.vch_ref = "{vch_ref}"
 AND
     vch_rec.jrnl_no = {journal_no}
 {stat}
