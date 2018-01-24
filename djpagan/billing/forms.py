@@ -4,16 +4,14 @@ from django import forms
 from djpagan.billing.sql import JOURNAL_TYPES
 from djpagan.core.utils import get_objects
 
-from djtools.fields import BINARY_CHOICES
-
 
 class SearchTransactionForm(forms.Form):
 
     journal_type = forms.CharField()
-    journal_number = forms.CharField()
-    include_voids = forms.CharField(
-        widget=forms.RadioSelect(choices=BINARY_CHOICES)
+    journal_number = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Journal number'})
     )
+    include_voids = forms.BooleanField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(SearchTransactionForm, self).__init__(*args, **kwargs)

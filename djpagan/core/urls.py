@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView, TemplateView
 
+from djpagan.core import views
+
 from djauth.views import loggedout
 
 admin.autodiscover()
@@ -49,8 +51,8 @@ urlpatterns = [
     url(
         r'^billing/', include('djpagan.billing.urls')
     ),
-    # redirect
-    #url(
-    #    r'^$', RedirectView.as_view(url='/foobar/')
-    #),
+    # dashboard home
+    url(
+        r'^$', views.home, name='home'
+    ),
 ]

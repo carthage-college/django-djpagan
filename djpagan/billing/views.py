@@ -13,6 +13,7 @@ from djzbar.decorators.auth import portal_auth_required
 )
 def search(request, tipo=None):
 
+    sql = None
     objects = None
 
     if request.method == 'POST':
@@ -35,5 +36,5 @@ def search(request, tipo=None):
 
     return render(
         request, 'billing/search_transaction.html',
-        {'form':form, 'objects': objects}
+        {'form':form, 'objects': objects, 'sql':sql}
     )
