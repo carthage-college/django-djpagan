@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}
+    Dashboard &mdash;
+    DJ Pagan &mdash;
+    Student Accounts &mdash;
+    Business Services &mdash;
+    Carthage College
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-search fa-fw"></i>
+            Find a student
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <form class="form">
+            <input type="text" name="college_id" placeholder="Student's college ID">
+            <input type="submit">
+            </form>
+          </div>
+          <!-- /.panel-body -->
+        </div>
+        <!-- /.panel-default -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<hr class="mt-2">
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fa fa-search fa-fw"></i> Search by type
+  </div>
+  <div class="card-body">
+    <div class="row">
+        <div class="col-xl-3 col-sm-4 mb-3">
+          <form action="{% url 'search_home' %}" method="post">
+          {% csrf_token %}
+            <div class="card text-white bg-primary o-hidden h-100">
+              <div class="card-body text-white">
+                    <span class="pull-left" style="width:75%;">
+                    {{form_journal.journal_type}}
+                    {{form_journal.journal_number}}
+                    </span>
+                    <div class="pull-left" style="width:75%;">
+                    {{form_journal.include_voids}}
+                    {{form_journal.include_voids.label}}
+                    </div>
+              </div>
+              <div class="card-footer clearfix small z-1">
+                <span class="float-left">
+                  <a href="{% url 'search_home' %}" class="text-white">Search by journal number</a>
+                </span>
+                <span class="float-right">
+                  <input type="submit" value="Submit" class="btn btn-default btn-xs">
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-xl-3 col-sm-4 mb-3">
+          <form action="{% url 'search_home' %}" method="post">
+          {% csrf_token %}
+            <div class="card text-white bg-warning o-hidden h-100">
+              <div class="card-body text-white">
+                    <span class="pull-left" style="width:75%;">
+                    {{form_journal.journal_type}}
+                    {{form_journal.journal_number}}
+                    </span>
+                    <div class="pull-left" style="width:75%;">
+                    {{form_journal.include_voids}}
+                    {{form_journal.include_voids.label}}
+                    </div>
+              </div>
+              <div class="card-footer clearfix small z-1">
+                <span class="float-left">
+                  <a href="{% url 'search_home' %}" class="text-white">Search by journal number</a>
+                </span>
+                <span class="float-right">
+                  <input type="submit" value="Submit" class="btn btn-default btn-xs">
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-xl-3 col-sm-4 mb-3">
+          <form action="{% url 'search_home' %}" method="post">
+          {% csrf_token %}
+            <div class="card text-white bg-success o-hidden h-100">
+              <div class="card-body text-white">
+                    <span class="pull-left" style="width:75%;">
+                    {{form_journal.journal_type}}
+                    {{form_journal.journal_number}}
+                    </span>
+                    <div class="pull-left" style="width:75%;">
+                    {{form_journal.include_voids}}
+                    {{form_journal.include_voids.label}}
+                    </div>
+              </div>
+              <div class="card-footer clearfix small z-1">
+                <span class="float-left">
+                  <a href="{% url 'search_home' %}" class="text-white">Search by journal number</a>
+                </span>
+                <span class="float-right">
+                  <input type="submit" value="Submit" class="btn btn-default btn-xs">
+                </span>
+              </div>              
+            </div>
+          </form>
+        </div>
+        <div class="col-xl-3 col-sm-4 mb-3">
+          <form action="{% url 'search_home' %}" method="post">
+          {% csrf_token %}
+            <div class="card text-white bg-danger o-hidden h-100">
+              <div class="card-body text-white">
+                    <span class="pull-left" style="width:75%;">
+                    {{form_journal.journal_type}}
+                    {{form_journal.journal_number}}
+                    </span>
+                    <div class="pull-left" style="width:75%;">
+                    {{form_journal.include_voids}}
+                    {{form_journal.include_voids.label}}
+                    </div>
+              </div>
+              <div class="card-footer clearfix small z-1">
+                <span class="float-left">
+                  <a href="{% url 'search_home' %}" class="text-white">Search by journal number</a>
+                </span>
+                <span class="float-right">
+                  <input type="submit" value="Submit" class="btn btn-default btn-xs">
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.card-body -->
+  <div class="card-footer small text-muted"></div>
+</div>
+<!-- /.card -->
+{% endblock content %}
