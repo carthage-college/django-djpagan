@@ -6,11 +6,7 @@ from djpagan.billing import views
 
 urlpatterns = [
     url(
-        r'^search/$',
-        views.search, name='search_home'
-    ),
-    url(
-        r'^search/(?P<tipo>\d+)/$',
+        r'^search/(?P<tipo>[-\w]+)/$',
         views.search, name='search_type'
     ),
 ]
