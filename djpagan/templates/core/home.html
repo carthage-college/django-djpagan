@@ -106,22 +106,21 @@
           </form>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-9 mb-3">
-          <form action="{% url 'search_type' 'test' %}" method="post">
+          <form action="{% url 'search_type' 'cheque' %}" method="post">
           {% csrf_token %}
             <div class="card text-white bg-info o-hidden h-100">
               <div class="card-body text-white">
                     <span class="pull-left" style="width:75%;">
-                    {{form_journal.journal_type}}
-                    {{form_journal.journal_number}}
+                    {{form_cheque.cheque_number}}
                     </span>
                     <div class="pull-left" style="width:75%;">
-                    {{form_journal.include_voids}}
-                    {{form_journal.include_voids.label_tag}}
+                    {{form_cheque.include_voids}}
+                    {{form_cheque.include_voids.label_tag}}
                     </div>
               </div>
               <div class="card-footer clearfix small z-1">
                 <span class="float-left" style="font-size:1.2em;">
-                  <a href="{% url 'search_type' 'test' %}" class="text-white">Search by journal number</a>
+                  <a href="{% url 'search_type' 'cheque' %}" class="text-white">Search by check number</a>
                 </span>
                 <span class="float-right">
                   <input type="submit" value="Submit" class="btn btn-default btn-xs">
