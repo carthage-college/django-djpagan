@@ -7,7 +7,7 @@ from djpagan.core.utils import get_objects
 from djtools.fields import TODAY
 
 
-class SearchTransactionForm(forms.Form):
+class SearchJournalForm(forms.Form):
 
     journal_type = forms.CharField()
     journal_number = forms.CharField(
@@ -16,7 +16,7 @@ class SearchTransactionForm(forms.Form):
     include_voids = forms.BooleanField(required=False)
 
     def __init__(self, *args, **kwargs):
-        super(SearchTransactionForm, self).__init__(*args, **kwargs)
+        super(SearchJournalForm, self).__init__(*args, **kwargs)
 
         objects = get_objects(JOURNAL_TYPES)
         choices = [("","---journal type---")]
@@ -47,3 +47,22 @@ class SearchBridgedForm(forms.Form):
         self.fields['course_no'] = forms.ChoiceField(
             choices=choices
         )
+
+
+class SearchTransactionForm(forms.Form):
+
+    student_number = forms.CharField(
+        label = "Student ID",
+        widget=forms.TextInput(attrs={'placeholder': 'Student ID'})
+    )
+    include_voids = forms.BooleanField(required=False)
+
+
+class SearchChequeForm(forms.Form):
+
+    cheque_number = forms.CharField(
+        label = "Check number",
+        widget=forms.TextInput(attrs={'placeholder': 'Check number'})
+    )
+    include_voids = forms.BooleanField(required=False)
+

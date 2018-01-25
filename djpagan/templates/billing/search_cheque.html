@@ -1,6 +1,6 @@
 {% extends "billing/search_base.html" %}
 {% block title %}
-    Search by student ID for all transactions &mdash;
+    Search by cheque number &mdash;
     Billing &mdash;
     DJ Pagan &mdash;
     Student Accounts &mdash;
@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-lg-12">
        <h1>
-        Search by student ID for all transactions
+        Search by check number
         <small class="fright" style="margin-right:20px;">
         <a href="{% url 'home' %}"><i class="fa fa-home fa-2x green"></i></a>
         </small>
@@ -32,7 +32,7 @@
     <thead>
       <tr>
         <th>Station</th>
-        <th>Use</th>
+        <th>User</th>
         <th>jrnl_ref</th>
         <th>jrnl_no</th>
         <th>gle_no</th>
@@ -46,48 +46,46 @@
         <th>jrnl_date</th>
         <th>add_date</th>
         <th>pst_date</th>
-        <th>VCH_Stat</th>
-        <th>SUBE_Stat</th>
+        <th>stat</th>
         <th>amt</th>
         <th>subs</th>
         <th>suba_no</th>
         <th>fullname</th>
-        <th>SUBTR_Stat</th>
+        <th>SUBE_Stat</th>
         <th>ctgry</th>
         <th>SUBE_EntNo</th>
         <th>tot_code</th>
         <th>tot_prd</th>
         <th>bal_code</th>
-        <th>bal_pr</th>
+        <th>bal_prd</th>
       </tr>
     </thead>
     <tbody>
     {% for o in objects %}
       <tr>
-        <td>{{o.stn_no}}</td>
-        <td>{{o.user_name}}</td>
+        <td>{{o.0}}</td>
+        <td>{{o.1}}</td>
         <td>{{o.jrnl_ref}}</td>
         <td>{{o.jrnl_no}}</td>
         <td>{{o.gle_no}}</td>
-        <td>{{o.doc_ref}}</td>
+        <td>{{o.5}}</td>
         <td>{{o.doc_ref}}</td>
         <td>{{o.doc_no}}</td>
         <td>{{o.doc_id}}</td>
         <td>{{o.9}}</td>
         <td>{{o.pmt_frm}}</td>
-        <td>{{o.pmt_no}}</td>
+        <td>{{o.11}}</td>
         <td>{{o.jrnl_date}}</td>
         <td>{{o.add_date}}</td>
         <td>{{o.pst_date}}</td>
-        <td>{{o.15}}</td>
-        <td>{{o.16}}</td>
+        <td>{{o.stat}}</td>
         <td>{{o.amt}}</td>
         <td>{{o.subs}}</td>
         <td>{{o.suba_no}}</td>
         <td>{{o.fullname}}</td>
-        <td>{{o.21}}</td>
+        <td>{{o.20}}</td>
         <td>{{o.ctgry}}</td>
-        <td>{{o.23}}</td>
+        <td>{{o.22}}</td>
         <td>{{o.tot_code}}</td>
         <td>{{o.tot_prd}}</td>
         <td>{{o.bal_code}}</td>
@@ -97,7 +95,7 @@
     </tbody>
       <tfoot>
         <th>Station</th>
-        <th>Use</th>
+        <th>User</th>
         <th>jrnl_ref</th>
         <th>jrnl_no</th>
         <th>gle_no</th>
@@ -111,19 +109,18 @@
         <th>jrnl_date</th>
         <th>add_date</th>
         <th>pst_date</th>
-        <th>VCH_Stat</th>
-        <th>SUBE_Stat</th>
+        <th>stat</th>
         <th>amt</th>
         <th>subs</th>
         <th>suba_no</th>
         <th>fullname</th>
-        <th>SUBTR_Stat</th>
+        <th>SUBE_Stat</th>
         <th>ctgry</th>
         <th>SUBE_EntNo</th>
         <th>tot_code</th>
         <th>tot_prd</th>
         <th>bal_code</th>
-        <th>bal_pr</th>
+        <th>bal_prd</th>
       </tfoot>
     </table>
     </div>
