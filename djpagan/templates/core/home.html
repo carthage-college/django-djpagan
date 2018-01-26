@@ -19,8 +19,8 @@
           {% csrf_token %}
             <div class="card text-white bg-primary o-hidden h-100">
               <div class="card-header clearfix small z-1">
-                <span class="float-left" style="font-size:1.2em;">
-                  <a href="{% url 'search_type' 'journal' %}" class="text-white">Journal number &amp; type</a>
+                <span class="float-left">
+                  <a href="{% url 'search_type' 'journal' %}" class="text-white">Journal type &amp; number</a>
                 </span>
               </div>
               <div class="card-body text-white">
@@ -46,7 +46,7 @@
           {% csrf_token %}
             <div class="card text-white bg-secondary o-hidden h-100">
               <div class="card-header clearfix small z-1">
-                <span class="float-left" style="font-size:1.2em;">
+                <span class="float-left">
                   <a href="{% url 'search_type' 'bridged' %}" class="text-white">Search bridged classes</a>
                 </span>
               </div>
@@ -68,7 +68,7 @@
           {% csrf_token %}
             <div class="card text-white bg-success o-hidden h-100">
               <div class="card-header clearfix small z-1">
-                <span class="float-left" style="font-size:1.2em;">
+                <span class="float-left">
                   <a href="{% url 'search_type' 'transaction' %}" class="text-white">All student transactions</a>
                 </span>
               </div>
@@ -94,7 +94,7 @@
           {% csrf_token %}
             <div class="card text-white bg-info o-hidden h-100">
               <div class="card-header clearfix small z-1">
-                <span class="float-left" style="font-size:1.2em;">
+                <span class="float-left">
                   <a href="{% url 'search_type' 'cheque' %}" class="text-white">Search by check number</a>
                 </span>
               </div>

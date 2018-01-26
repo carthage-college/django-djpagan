@@ -19,13 +19,15 @@
 .btn {padding: .1rem .2rem;font-size:inherit;}
 .card-body { padding: .5rem; }
 .card-body select { width: 99%; }
+.card-header { font-size:1.2em; padding: .25rem .5rem;}
 .card-footer { padding: .25rem .5rem;}
 .card {min-height: 160px;}
 .content-wrapper { margin-left: 0;margin-top:50px; }
-nav a {color:white;}
-nav a:hover {color:black;}
+nav a {color: #cbbde2;}
+nav a:hover {color:#fff;}
 nav .input-group-btn {font-size:1.3em;}
-.dropdown-menu {padding: 5px; background-color:#17a2b8;}
+.navbar-toggler-icon {color:yellow;}
+.dropdown-menu {padding: 5px; background-color:#563d7c;}
 .dropdown, .dropup { padding: 3px; }
 </style>
 {% endblock %}
@@ -45,13 +47,12 @@ $(function() {
 {% endblock %}
 {% block body_tag %}{% endblock %}
 {% block navigation %}
-<nav class="navbar navbar-expand-lg bg-boot fixed-top" id="mainNav">
-  {% block navbar-header %}
-    <small style="margin-right:20px;">
-      <a href="{% url 'home' %}" class="green"><i class="fa fa-home fa-2x green"></i></a>
-    </small>
-    <a class="navbar-brand" href="{% url 'home' %}">Dashboard</a>
-  {% endblock %}
+<nav class="navbar navbar-expand-lg bg-boot fixed-top navbar-dark" id="mainNav">
+  <a class="navbar-brand" href="{% url 'home' %}">Dashboard</a>
+<button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
       <form class="form-inline my-2 my-lg-0 mr-lg-2" action="." method="post">
@@ -87,6 +88,7 @@ $(function() {
         </ul>
     </li>
   </ul>
+  </div>
 </nav>
 {% endblock %}
 {% block content %}{% endblock %}
