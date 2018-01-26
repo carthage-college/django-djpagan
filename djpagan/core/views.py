@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 
+from djpagan.core.sql import MOST_RECENT_TERM
 from djpagan.core.forms import MostRecentTermForm
 from djpagan.core.utils import get_objects
 from djpagan.billing.forms import *
@@ -44,11 +45,11 @@ def most_recent_term(request):
             sql = MOST_RECENT_TERM(
                 student_number = data['student_number']
             )
-            student = get_objects(data['student_number'])
+            student = get_objects(sql)
     else:
         form = MostRecentTermForm()
 
     return render(
         request, 'core/most_recent_term.html',
-        {form:'form', 'student':student,}
+        {'form':form, 'student':student,}
     )

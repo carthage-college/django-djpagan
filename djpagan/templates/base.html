@@ -59,7 +59,7 @@ $(function() {
       <form class="form-inline my-2 my-lg-0 mr-sm-3 mr-lg-3" action="{% url 'most_recent_term' %}" method="post">
         {% csrf_token %}
         <div class="input-group">
-          <input class="form-control" name="college_id" placeholder="Student's college ID..." type="text">
+          <input class="form-control" name="student_number" placeholder="Student's college ID..." type="text">
           <span class="input-group-btn">
             <button class="btn btn-primary" type="submit">
               <i class="fa fa-search"></i>
