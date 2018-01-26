@@ -44,10 +44,10 @@
         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
           <form action="{% url 'search_type' 'bridged' %}" method="post">
           {% csrf_token %}
-            <div class="card text-white bg-warning o-hidden h-100">
+            <div class="card text-white bg-secondary o-hidden h-100">
               <div class="card-header clearfix small z-1">
                 <span class="float-left" style="font-size:1.2em;">
-                  <a href="{% url 'search_type' 'bridged' %}">Search bridged classes</a>
+                  <a href="{% url 'search_type' 'bridged' %}" class="text-white">Search bridged classes</a>
                 </span>
               </div>
               <div class="card-body text-white">
