@@ -24,8 +24,6 @@ def search(request, tipo):
 
     sql = None
     objects = None
-    void = 'AND vch_rec.stat <> "V"'
-    stat = ''
     if not tipo:
         raise Http404
 
@@ -47,13 +45,15 @@ def search(request, tipo):
         form = form_class(request.POST.copy(), prefix=tipo)
         if form.is_valid():
             data = form.cleaned_data
+            stat = 'AND vch_rec.stat <> "V"'
+            if data.get('include_voids'):
+                stat = ''
+            # various types of search parameters
             if tipo == 'journal':
-                if not data['include_voids']:
-                    stat = void
                 sql = JOURNAL_TRANSACTIONS(
                     vch_ref = data['journal_type'],
                     journal_no = data['journal_number'],
-                    stat = void
+                    stat = stat
                 )
             elif tipo == 'bridged':
                 course_no = data['course_no']
@@ -69,18 +69,14 @@ def search(request, tipo):
                     a_sess = bridged[0].a_sess, b_sess = bridged[0].b_sess
                 )
             elif tipo == 'transaction':
-                if not data['include_voids']:
-                    stat = void
                 sql = ALL_TRANSACTIONS(
                     student_id = data['student_number'],
-                    stat = void
+                    stat = stat
                 )
             elif tipo == 'cheque':
-                if not data['include_voids']:
-                    stat = void
                 sql = CHEQUE_NUMBER(
                     cheque_number = data['cheque_number'],
-                    stat = void
+                    stat = stat
                 )
             elif tipo == 'test':
                 pass
