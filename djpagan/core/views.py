@@ -9,7 +9,8 @@ from djzbar.decorators.auth import portal_auth_required
 
 
 @portal_auth_required(
-    'StudentAccounts', 'DJPAGAN_AUTH', reverse_lazy('access_denied')
+    group='StudentAccounts', session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied')
 )
 def home(request):
 
