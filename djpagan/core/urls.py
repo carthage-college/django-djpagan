@@ -47,9 +47,14 @@ urlpatterns = [
             template_name='denied.html'
         ), name='access_denied'
     ),
-    # my app
+    # billing search and reports
     url(
         r'^billing/', include('djpagan.billing.urls')
+    ),
+    # Student most recent term attended
+    url(
+        r'^most-recent-term/$', views.most_recent_term,
+        name='most_recent_term'
     ),
     # dashboard home
     url(

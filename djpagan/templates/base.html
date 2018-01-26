@@ -48,14 +48,15 @@ $(function() {
 {% block body_tag %}{% endblock %}
 {% block navigation %}
 <nav class="navbar navbar-expand-sm bg-boot fixed-top navbar-dark" id="mainNav">
-  <a class="navbar-brand" href="{% url 'home' %}">Dashboard</a>
+  <a href="{% url 'home' %}" class="mr-sm-3 mr-lg-3"><i class="fa fa-home fa-2x green"></i></a>
+  <a class="navbar-brand" href="{% url 'home' %}">Student Accounts</a>
     <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   <div class="collapse navbar-collapse" id="navbarResponsive">
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <form class="form-inline my-2 my-lg-0 mr-sm-3 mr-lg-3" action="." method="post">
+      <form class="form-inline my-2 my-lg-0 mr-sm-3 mr-lg-3" action="{% url 'most_recent_term' %}" method="post">
         {% csrf_token %}
         <div class="input-group">
           <input class="form-control" name="college_id" placeholder="Student's college ID..." type="text">

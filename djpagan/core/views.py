@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 
-from djpagan.billing.forms import *
-from djpagan.billing.sql import JOURNAL_TYPES
+from djpagan.core.forms import MostRecentTermForm
 from djpagan.core.utils import get_objects
+from djpagan.billing.forms import *
 
 from djzbar.decorators.auth import portal_auth_required
 
@@ -27,4 +27,28 @@ def home(request):
             'form_journal':form_journal,
             'form_transaction':form_transaction
         }
+    )
+
+
+@portal_auth_required(
+    group='StudentAccounts', session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied')
+)
+def most_recent_term(request):
+
+    student = None
+    if request.method == 'POST':
+        form = MostRecentTermForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            sql = MOST_RECENT_TERM(
+                student_number = data['student_number']
+            )
+            student = get_objects(data['student_number'])
+    else:
+        form = MostRecentTermForm()
+
+    return render(
+        request, 'core/most_recent_term.html',
+        {form:'form', 'student':student,}
     )

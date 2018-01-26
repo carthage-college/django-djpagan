@@ -1,0 +1,30 @@
+{% extends "core/home.html" %}
+{% block title %}
+    Student Most Recent Term &mdash;
+    DJ Pagan &mdash;
+    Student Accounts &mdash;
+    Business Services &mdash;
+    Carthage College
+{% endblock %}
+{% block content %}
+  {% include "core/form.inc.html" %}
+  {% if student %}
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="fa fa-table fa-fw"></i>
+      Student data
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
+        boo!
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer small text-muted"></div>
+  </div>
+  <!-- /.card -->
+  {% endif %}
+{% endblock content %}
