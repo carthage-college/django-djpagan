@@ -20,6 +20,12 @@
 .card-body select { width: 99%; }
 .card-footer { padding: .25rem .5rem;}
 .card {min-height: 160px;}
+.content-wrapper { margin-left: 0;margin-top:50px; }
+nav a {color:white;}
+nav a:hover {color:black;}
+nav .input-group-btn {font-size:1.3em;}
+.dropdown-menu {padding: 5px; background-color:#17a2b8;}
+.dropdown, .dropup { padding: 3px; }
 </style>
 {% endblock %}
 {% block extra_javascript %}
@@ -37,20 +43,51 @@ $(function() {
 </script>
 {% endblock %}
 {% block body_tag %}{% endblock %}
-{% block navigation %}{% endblock %}
-{% block navbar-header %}{% endblock %}
-{% block content-wrapper %}{% endblock %}
-{% block breadcrumb %}
-<div class="row">
-    <div class="col-lg-12">
-       <h1>
-        Dashboard
-        <small class="fright" style="margin-right:20px;">
-        <a href="{% url 'home' %}"><i class="fa fa-home fa-2x green"></i></a>
-        </small>
-        </h1>
-    </div>
-</div>
+{% block navigation %}
+<nav class="navbar navbar-expand-lg bg-info fixed-top" id="mainNav">
+  {% block navbar-header %}
+    <small style="margin-right:20px;">
+      <a href="{% url 'home' %}" class="green"><i class="fa fa-home fa-2x green"></i></a>
+    </small>
+    <a class="navbar-brand" href="{% url 'home' %}">Dashboard</a>
+  {% endblock %}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <form class="form-inline my-2 my-lg-0 mr-lg-2">
+        <div class="input-group">
+          <input class="form-control" placeholder="Search for..." type="text">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>
+      </form>
+    </li>
+        <li class="dropdown user-dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-user"></i> {{user.first_name}}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="divider"></li>
+                <li>
+                    {% if user.is_anonymous %}
+                    <a href="{% url 'auth_login' %}">
+                        <i class="fa fa-sign-in"></i> Sign In
+                    </a>
+                    {% else %}
+                    <a href="{% url 'auth_logout' %}">
+                        <i class="fa fa-sign-out"></i> Sign Out
+                    </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </li>
+  </ul>
+</nav>
 {% endblock %}
+{% block content %}{% endblock %}
+{% block breadcrumb %}{% endblock %}
 {% block footer %}{% endblock %}
 {% block logout %}{% endblock %}
