@@ -4,7 +4,10 @@ from django.core.urlresolvers import reverse_lazy
 from djpagan.core.sql import MOST_RECENT_TERM
 from djpagan.core.forms import MostRecentTermForm
 from djpagan.core.utils import get_objects
-from djpagan.billing.forms import *
+from djpagan.billing.forms import SearchBridgedForm
+from djpagan.billing.forms import SearchChequeForm
+from djpagan.billing.forms import SearchJournalForm
+from djpagan.billing.forms import SearchTransactionForm
 
 from djzbar.decorators.auth import portal_auth_required
 
