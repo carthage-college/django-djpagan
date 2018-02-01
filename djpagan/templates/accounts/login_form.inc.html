@@ -5,7 +5,7 @@
             <div style="padding: 20px;" id="form-olvidado">
                 <form accept-charset="UTF-8" role="form" name="djauth"
                     id="login-form" method="post"
-                    action="{{action|default:'.'}}">
+                    action="{{action}}">
                     {% csrf_token %}
                     <input type="hidden" name="next"
                         value="{% if next %}{{ next }}{% endif %}">
