@@ -24,8 +24,6 @@ def search(request, tipo):
 
     sql = None
     objects = None
-    if not tipo:
-        raise Http404
 
     # check for a valid template or redirect home
     try:
