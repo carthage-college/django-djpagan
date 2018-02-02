@@ -4,7 +4,7 @@ from django import forms
 
 class MostRecentTermForm(forms.Form):
 
-    student_number = forms.CharField(
+    student_number = forms.IntegerField(
         label = "Student ID",
         widget=forms.TextInput(attrs={'placeholder': 'Student ID'})
     )

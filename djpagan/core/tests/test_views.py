@@ -1,11 +1,11 @@
+from django.conf import settings
 from django.test import Client
 from django.test import TestCase
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Group
 
-D = "-------------------------------------------------------------------------"
+from djtools.utils.logging import seperator
 
 
 class CoreViewsTestCase(TestCase):
@@ -28,11 +28,10 @@ class CoreViewsTestCase(TestCase):
             'password': self.password
         }
 
-
     def test_home(self):
         print "\n"
-        print "Home Page Test"
-        print D
+        print "Home Page"
+        seperator()
         earl = reverse('home')
         print earl
         # get home page
@@ -52,8 +51,8 @@ class CoreViewsTestCase(TestCase):
 
     def test_most_recent_term(self):
         print "\n"
-        print "Most Recent Term Test"
-        print D
+        print "Most Recent Term"
+        seperator()
         earl = reverse('most_recent_term')
         print earl
         # get page

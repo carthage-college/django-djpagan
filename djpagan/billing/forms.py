@@ -10,7 +10,7 @@ from djtools.fields import TODAY
 class SearchJournalForm(forms.Form):
 
     journal_type = forms.CharField()
-    journal_number = forms.CharField(
+    journal_number = forms.IntegerField(
         widget=forms.TextInput(attrs={'placeholder': 'Journal number'})
     )
     include_voids = forms.BooleanField(required=False)
@@ -51,7 +51,7 @@ class SearchBridgedForm(forms.Form):
 
 class SearchTransactionForm(forms.Form):
 
-    student_number = forms.CharField(
+    student_number = forms.IntegerField(
         label = "Student ID",
         widget=forms.TextInput(attrs={'placeholder': 'Student ID'})
     )
@@ -60,7 +60,7 @@ class SearchTransactionForm(forms.Form):
 
 class SearchChequeForm(forms.Form):
 
-    cheque_number = forms.CharField(
+    cheque_number = forms.IntegerField(
         label = "Check number",
         widget=forms.TextInput(attrs={'placeholder': 'Check number'})
     )
