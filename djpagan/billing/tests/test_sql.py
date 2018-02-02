@@ -23,6 +23,7 @@ class CoreSQLTestCase(TestCase):
     def test_journal_types_sql(self):
 
         objects = get_objects(JOURNAL_TYPES)
+        self.assertGreaterEqual(len(objects), 1)
 
     def test_journal_transactions_sql(self):
 
@@ -33,6 +34,7 @@ class CoreSQLTestCase(TestCase):
         )
 
         objects = get_objects(sql)
+        self.assertGreaterEqual(len(objects), 1)
 
     def test_bridged_classes_sql(self):
 
@@ -44,6 +46,7 @@ class CoreSQLTestCase(TestCase):
                 course_no = 'AND crs_rec.crs_no="{}"'.format(course_no)
             )
         )
+        self.assertGreaterEqual(len(bridged), 1)
 
         sql = BRIDGED_CLASSES_STUDENTS(
             year = bridged[0].yr, course_no = course_no,
@@ -51,6 +54,7 @@ class CoreSQLTestCase(TestCase):
         )
 
         objects = get_objects(sql)
+        self.assertGreaterEqual(len(objects), 1)
 
     def test_all_student_transactions_sql(self):
 
@@ -60,6 +64,7 @@ class CoreSQLTestCase(TestCase):
         )
 
         objects = get_objects(sql)
+        self.assertGreaterEqual(len(objects), 1)
 
     def test_cheque_number_sql(self):
 
@@ -69,4 +74,5 @@ class CoreSQLTestCase(TestCase):
         )
 
         objects = get_objects(sql)
+        self.assertGreaterEqual(len(objects), 1)
 
