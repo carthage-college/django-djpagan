@@ -5,8 +5,13 @@ from django.shortcuts import render
 from django.http import Http404
 
 from djpagan.core.utils import get_objects
-from djpagan.billing.forms import *
-from djpagan.billing.sql import *
+from djpagan.billing.forms import SearchBridgedForm
+from djpagan.billing.forms import SearchChequeForm
+from djpagan.billing.forms import SearchJournalForm
+from djpagan.billing.forms import SearchTransactionForm
+from djpagan.billing.sql import BRIDGED_CLASSES
+from djpagan.billing.sql import CHEQUE_NUMBER
+from djpagan.billing.sql import JOURNAL_TRANSACTIONS
 
 from djzbar.decorators.auth import portal_auth_required
 
@@ -14,6 +19,8 @@ from djtools.utils.convert import str_to_class
 from djtools.fields import TODAY
 
 import os
+
+STATUS = settings.VOID_STATUS
 
 
 @portal_auth_required(
@@ -43,7 +50,7 @@ def search(request, tipo):
         form = form_class(request.POST.copy(), prefix=tipo)
         if form.is_valid():
             data = form.cleaned_data
-            stat = 'AND vch_rec.stat <> "V"'
+            stat = STATUS
             if data.get('include_voids'):
                 stat = ''
             # various types of search parameters

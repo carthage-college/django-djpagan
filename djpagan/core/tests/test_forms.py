@@ -1,7 +1,5 @@
 from django.conf import settings
-from django.test import Client
 from django.test import TestCase
-from django_webtest import WebTest
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
@@ -24,7 +22,7 @@ class CoreFormsTestCase(TestCase):
 
     def test_most_recent_term_invalid_data(self):
         form = MostRecentTermForm({
-            'student_number': 'studentno',
+            'student_number': '1234568-9',
         })
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors, {
