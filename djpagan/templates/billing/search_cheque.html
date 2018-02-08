@@ -1,4 +1,4 @@
-{% extends "billing/search_base.html" %}
+{% extends "core/search_base.html" %}
 {% block title %}
     Search by cheque number &mdash;
     Billing &mdash;
@@ -20,7 +20,7 @@
 </div>
 {% endblock %}
 {% block content %}
-{% include "core/form.inc.html" %}
+{% include "includes/form.inc.html" %}
 {% if objects %}
 <div class="card mb-3">
   <div class="card-header">

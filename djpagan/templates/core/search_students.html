@@ -1,0 +1,89 @@
+{% extends "core/search_base.html" %}
+{% block title %}
+    Search Students &mdash;
+    DJ Pagan &mdash;
+    Student Accounts &mdash;
+    Business Services &mdash;
+    Carthage College
+{% endblock %}
+{% block breadcrumb %}
+<div class="row">
+    <div class="col-lg-12">
+       <h1>
+        Search for Students
+        <small class="fright" style="margin-right:20px;">
+        <a href="{% url 'home' %}"><i class="fa fa-home fa-2x green"></i></a>
+        </small>
+        </h1>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+  {% include "includes/form.inc.html" %}
+{% if students %}
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fa fa-table"></i> Students
+  </div>
+  <div class="card-body" style="margin-bottom:20px">
+    <div class="table-responsive">
+    <table class="table table-bordered table-hover" width="100%" cellspacing="0" id="data-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Last name</th>
+        <th>First name</th>
+        <th>Program</th>
+        <th>Sub program</th>
+        <th>Class</th>
+        <th>Nursing</th>
+        <th>Cohort Yr</th>
+        <th>Acst</th>
+        <th>Balance</th>
+        <th>Description</th>
+        <th>Dunning letter</th>
+        <th>Interest</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for s in students %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>
+            <a href="{% url 'student_detail' s.id %}">{{s.lastname}}</a>
+        </td>
+        <td>{{s.firstname}}</td>
+        <td>{{s.prog}}</td>
+        <td>{{s.subprog}}</td>
+        <td>{{s.cl}}</td>
+        <td>{{s.nurs_prog}}</td>
+        <td>{{s.cohort_yr}}</td>
+        <td>{{s.acst}}</td>
+        <td>{{s.SA_balance}}</td>
+        <td>{{s.descr}}</td>
+        <td>{{s.dunning_letter}}</td>
+        <td>{{s.interest_wvd}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+      <tfoot>
+        <th>#</th>
+        <th>Last name</th>
+        <th>First name</th>
+        <th>Program</th>
+        <th>Sub program</th>
+        <th>Class</th>
+        <th>Nursing</th>
+        <th>Cohort Yr</th>
+        <th>Acst</th>
+        <th>Balance</th>
+        <th>Description</th>
+        <th>Dunning letter</th>
+        <th>Interest</th>
+      </tfoot>
+    </table>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock content %}

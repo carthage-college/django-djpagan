@@ -1,8 +1,15 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
 
-from djpagan.core.sql import MOST_RECENT_TERM
-from djpagan.core.forms import MostRecentTermForm
+from djpagan.core.sql import SUBSIDIARY_BALANCES
+from djpagan.core.sql import PROGRAM_ENROLLMENT
+from djpagan.core.sql import ACCOUNT_NOTES
+from djpagan.core.sql import ORDERED_TERMS_TEMP
+from djpagan.core.sql import SESSION_DETAILS
+from djpagan.core.sql import SEARCH_STUDENTS
+
+from djpagan.core.forms import SearchStudentsForm, StudentDetailForm
 from djpagan.core.utils import get_objects
 from djpagan.billing.forms import SearchBridgedForm
 from djpagan.billing.forms import SearchChequeForm
@@ -38,21 +45,47 @@ def home(request):
     group='StudentAccounts', session_var='DJPAGAN_AUTH',
     redirect_url=reverse_lazy('access_denied')
 )
-def most_recent_term(request):
-
-    student = None
+def search_students(request):
+    sql = None
+    students = None
     if request.method == 'POST':
-        form = MostRecentTermForm(request.POST)
+        form = SearchStudentsForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            sql = MOST_RECENT_TERM(
-                student_number = data['student_number']
-            )
-            student = get_objects(sql)
+            student = data['student']
+            try:
+                sid = int(student)
+                return HttpResponseRedirect(
+                    reverse_lazy('student_detail', args=[sid])
+                )
+            except:
+                sql = SEARCH_STUDENTS(
+                    lastname = student
+                )
+                students = get_objects(sql)
     else:
-        form = MostRecentTermForm()
+        form = SearchStudentsForm()
 
     return render(
-        request, 'core/most_recent_term.html',
-        {'form':form, 'student':student,}
+        request, 'core/search_students.html',
+        {'form':form, 'students':students,'sql':sql}
+    )
+
+
+@portal_auth_required(
+    group='StudentAccounts', session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied')
+)
+def student_detail(request, sid):
+
+    enrollment = get_objects(PROGRAM_ENROLLMENT(student_number=sid), True)
+    ballance = get_objects(SUBSIDIARY_BALANCES(student_number=sid), True)
+    notes = get_objects(ACCOUNT_NOTES(student_number=sid), True)
+    details = get_objects(SESSION_DETAILS(student_number=sid), True)
+
+    return render(
+        request, 'core/detail_student.html', {
+            'enrollment':enrollment, 'ballance':ballance,
+            'notes':notes, 'details':details,
+        }
     )

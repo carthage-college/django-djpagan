@@ -51,10 +51,14 @@ urlpatterns = [
     url(
         r'^billing/', include('djpagan.billing.urls')
     ),
-    # Student most recent term attended
+    # search students by various parameters
     url(
-        r'^most-recent-term/$', views.most_recent_term,
-        name='most_recent_term'
+        r'^student/search/$', views.search_students,
+        name='search_students'
+    ),
+    url(
+        r'^student/(?P<sid>\d+)/$', views.student_detail,
+        name='student_detail'
     ),
     # dashboard home
     url(

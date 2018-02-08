@@ -1,4 +1,3 @@
-PROGRAM_ENROLLMENT = '''
 SELECT
     id_rec.id, trim(firstname) as firstname, trim(lastname) as lastname,
     prog, subprog, major1, major2, major3, nurs_prog, cl, cohort_yr,
@@ -8,10 +7,8 @@ FROM
 WHERE
     id_rec.id = prog_enr_rec.id
 AND
-    id_rec.id = {student_number}
-'''.format
+    id_rec.id =
 
-SUBSIDIARY_BALANCES = '''
 SELECT
     subs, bal_act, def_pmt_terms, stat, ent_no, cr_rating, descr,
     dunning_letter, interest_wvd, written_off, collect_agc,
@@ -19,10 +16,8 @@ SELECT
 FROM
     suba_rec
 WHERE
-    id = {student_number}
-'''.format
+    id =
 
-ACCOUNT_NOTES = '''
 SELECT
     suba_rec.subs, suba_rec.id, suba_blob.*
 FROM
@@ -32,10 +27,8 @@ WHERE
 AND
     suba_blob.comm is not null
 AND
-    suba_rec.id = {student_number}
-'''.format
+    suba_rec.id =
 
-SESSION_DETAILS = '''
 SELECT
     stu_acad_rec.sess, stu_acad_rec.yr, stu_acad_rec.prog,
     stu_acad_rec.subprog,
@@ -66,12 +59,10 @@ WHERE
 -- AND stu_acad_rec.sess = ordered_terms.sess
 -- AND stu_acad_rec.prog = ordered_terms.prog
 AND
-    stu_acad_rec.id = {student_number}
+    stu_acad_rec.id =
 ORDER BY
     stu_acad_rec.id
-'''.format
 
-SEARCH_STUDENTS = '''
 SELECT
      id_rec.id, trim(firstname) as firstname, trim(lastname) as lastname,
      prog, subprog, cl, nurs_prog, cohort_yr,
@@ -87,14 +78,12 @@ ON
 WHERE
     id_rec.id = prog_enr_rec.id
 AND
-    LOWER(lastname) = TRIM(LOWER("{lastname}"))
+    LOWER(lastname) = TRIM(LOWER("SMITH "))
 AND
     prog_enr_rec.acst = "GOOD"
 ORDER BY
     lastname, firstname
-'''.format
 
-ORDERED_TERMS_TEMP = '''
 SELECT
     rank() over (order by end_date) as latest,
     prog, yr, sess, subsess, acyr, beg_date, end_date
@@ -110,4 +99,3 @@ ORDER BY
     end_date DESC
 INTO TEMP
     ordered_terms
-'''

@@ -57,10 +57,10 @@ $(function() {
   <ul class="navbar-nav ml-auto">
     {% if not user.is_anonymous %}
     <li class="nav-item">
-      <form class="form-inline my-2 my-lg-0 mr-sm-3 mr-lg-3" action="{% url 'most_recent_term' %}" method="post">
+      <form class="form-inline my-2 my-lg-0 mr-sm-3 mr-lg-3" action="{% url 'search_students' %}" method="post">
         {% csrf_token %}
         <div class="input-group">
-          <input class="form-control" name="student_number" placeholder="Student's college ID..." type="text">
+          <input class="form-control" name="student" placeholder="Last name or ID..." type="text">
           <span class="input-group-btn">
             <button class="btn btn-primary" type="submit">
               <i class="fa fa-search"></i>
