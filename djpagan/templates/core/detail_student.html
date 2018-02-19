@@ -7,32 +7,80 @@
     Carthage College
 {% endblock %}
 {% block content %}
-  <div class="card mb-3">
-    <div class="card-header">
-      <i class="fa fa-table fa-fw"></i>
-      {{enrollment.lastname}}, {{enrollment.firstname}}
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
-            {% if enrollment  %}
-            enrollment = {{enrollment}}<br>
-            {% endif %}
-            {% if ballance %}
-            ballance = {{ballance}}<br>
-            {% endif %}
-            {% if notes %}
-            notes = {{notes}}<br>
-            {% endif %}
-            {% if details %}
-            details = {{details}}<br>
-            {% endif %}
+<div class="card mb-3">
+  <div class="card-header alert-info">
+    <h3>
+    <i class="fa fa-leaf fa-fw"></i>
+    {{enrollment.lastname}}, {{enrollment.firstname}} ({{enrollment.id}})
+    </h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
+        <div class="card">
+          <div class="card-header clearfix small z-1 alert-warning">
+            <span class="float-left">
+              Program Details
+            </span>
+          </div>
+          <div class="card-body">
+            {{enrollment}}
+          </div>
         </div>
       </div>
-      <!-- /.row -->
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
+        <div class="card">
+          <div class="card-header clearfix small z-1 alert-warning">
+            <span class="float-left">
+              Ballances
+            </span>
+          </div>
+          <div class="card-body">
+            {{ballance}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
+        <div class="card">
+          <div class="card-header clearfix small z-1 alert-warning">
+            <span class="float-left">
+              Notes
+            </span>
+          </div>
+          <div class="card-body">
+            {{notes}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
+        <div class="card">
+          <div class="card-header clearfix small z-1 alert-success">
+            <span class="float-left">
+              Enrolled Sessions
+            </span>
+          </div>
+          <div class="card-body">
+            {{details}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
+        <div class="card">
+          <div class="card-header clearfix small z-1 alert-primary">
+            <span class="float-left">
+              Planning Letter History
+            </span>
+          </div>
+          <div class="card-body">
+            {{planning}}
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.card-body -->
-    <div class="card-footer small text-muted"></div>
+    <!-- /.row -->
   </div>
-  <!-- /.card -->
+  <!-- /.card-body -->
+  <div class="card-footer small text-muted"></div>
+</div>
+<!-- /.card -->
 {% endblock content %}

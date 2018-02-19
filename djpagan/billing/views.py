@@ -9,7 +9,9 @@ from djpagan.billing.forms import SearchBridgedForm
 from djpagan.billing.forms import SearchChequeForm
 from djpagan.billing.forms import SearchJournalForm
 from djpagan.billing.forms import SearchTransactionForm
+from djpagan.billing.sql import ALL_TRANSACTIONS
 from djpagan.billing.sql import BRIDGED_CLASSES
+from djpagan.billing.sql import BRIDGED_CLASSES_STUDENTS
 from djpagan.billing.sql import CHEQUE_NUMBER
 from djpagan.billing.sql import JOURNAL_TRANSACTIONS
 
