@@ -20,7 +20,7 @@
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
         <div class="card h-100">
           <div class="card-header clearfix small z-1 alert-warning">
             <span class="float-left">
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
         <div class="card h-100">
           <div class="card-header clearfix small z-1 alert-warning">
             <span class="float-left">
@@ -98,7 +98,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
         <div class="card h-100">
           <div class="card-header clearfix small z-1 alert-warning">
             <span class="float-left">
@@ -124,12 +124,92 @@
             </span>
           </div>
           <div class="card-body">
-            {{details}}
+            <div class="row">
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                <div class="card h-100">
+                  <div class="card-body bg-light">
+                    <dl class="row">
+                      <dt class="col-sm-7 col-7">Session</dt>
+                      <dd class="col-sm-4 col-4">{{details.sess|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Year</dt>
+                      <dd class="col-sm-4 col-4">{{details.year|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Program</dt>
+                      <dd class="col-sm-4 col-4">{{details.prog|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Sub Program</dt>
+                      <dd class="col-sm-4 col-4">{{details.subprog|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Class</dt>
+                      <dd class="col-sm-4 col-4">{{details.cl|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Reg Status</dt>
+                      <dd class="col-sm-4 col-4">{{details.reg_stat|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Reg Hours</dt>
+                      <dd class="col-sm-4 col-4">{{details.reg_hrs|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Acct Status</dt>
+                      <dd class="col-sm-4 col-4">{{details.acst|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Fin Clear</dt>
+                      <dd class="col-sm-4 col-4">{{details.fin_clr|default:"&nbsp;"}}</dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                <div class="card h-100">
+                  <div class="card-body bg-light">
+                    <dl class="row">
+                      <dt class="col-sm-7 col-7">Rsv Stat</dt>
+                      <dd class="col-sm-4 col-4">{{details.rsv_stat|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Offcampus</dt>
+                      <dd class="col-sm-4 col-4">{{details.offcampus_res_appr|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Inted Hsg</dt>
+                      <dd class="col-sm-4 col-4">{{details.intend_hsg|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Building</dt>
+                      <dd class="col-sm-4 col-4">{{details.bldg|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Room</dt>
+                      <dd class="col-sm-4 col-4">{{details.room|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Suite</dt>
+                      <dd class="col-sm-4 col-4">{{details.suite|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Bill Code</dt>
+                      <dd class="col-sm-4 col-4">{{details.bill_code|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Spec Flag</dt>
+                      <dd class="col-sm-4 col-4">{{details.spec_flag|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Health Ins Wvd</dt>
+                      <dd class="col-sm-4 col-4">{{details.hlth_ins_wvd|default:"&nbsp;"}}</dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                <div class="card h-100"> 
+                  <div class="card-body bg-light">
+                    <dl class="row">
+                      <dt class="col-sm-7 col-7">Meal Plan Type</dt>
+                      <dd class="col-sm-4 col-4">{{details.meal_plan_type|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Meal Plan Wave</dt>
+                      <dd class="col-sm-4 col-4">{{details.meal_plan_wvd|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Res Asst</dt>
+                      <dd class="col-sm-4 col-4">{{details.res_asst|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Status</dt>
+                      <dd class="col-sm-4 col-4">{{details.stat|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Park Prmt No</dt>
+                      <dd class="col-sm-4 col-4">{{details.park_prmt_no|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Park Prmt Xdate</dt>
+                      <dd class="col-sm-4 col-4">{{details.park_prmt_exp_date|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Park Loc</dt>
+                      <dd class="col-sm-4 col-4">{{details.park_location|default:"&nbsp;"}}</dd>
+                      <dt class="col-sm-7 col-7">Lot No</dt>
+                      <dd class="col-sm-4 col-4">{{details.lot_no|default:"&nbsp;"}}</dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
           </div>
+          <!-- /.card-body -->
         </div>
+        <!-- /.card -->
       </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-header clearfix small z-1 alert-primary">
             <span class="float-left">
               Planning Letter History
