@@ -79,13 +79,13 @@ def search_students(request):
 def student_detail(request, sid):
 
     enrollment = get_objects(PROGRAM_ENROLLMENT(student_number=sid), True)
-    ballance = get_objects(SUBSIDIARY_BALANCES(student_number=sid), True)
+    balances = get_objects(SUBSIDIARY_BALANCES(student_number=sid), True)
     notes = get_objects(ACCOUNT_NOTES(student_number=sid), True)
     details = get_objects(SESSION_DETAILS(student_number=sid), True)
 
     return render(
         request, 'core/detail_student.html', {
-            'enrollment':enrollment, 'ballance':ballance,
+            'enrollment':enrollment, 'balances':balances,
             'notes':notes, 'details':details,
         }
     )

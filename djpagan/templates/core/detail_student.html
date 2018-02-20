@@ -10,44 +10,105 @@
 <div class="card mb-3">
   <div class="card-header alert-info">
     <h3>
-    <i class="fa fa-leaf fa-fw"></i>
-    {{enrollment.lastname}}, {{enrollment.firstname}} ({{enrollment.id}})
+    <i class="fa fa-leaf" style="color:#28a745;"></i>
+    {{enrollment.lastname}}, {{enrollment.firstname}}
+    ({{enrollment.id}})
+    {{enrollment.prog}}
+    {{enrollment.subprog}}
+    {{enrollment.cl}}
     </h3>
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
-        <div class="card">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+        <div class="card h-100">
           <div class="card-header clearfix small z-1 alert-warning">
             <span class="float-left">
               Program Details
             </span>
-          </div>
-          <div class="card-body">
-            {{enrollment}}
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
-        <div class="card">
-          <div class="card-header clearfix small z-1 alert-warning">
-            <span class="float-left">
-              Ballances
+            <span class="float-right">
+              <i class="fa fa-info-circle"></i>
             </span>
           </div>
-          <div class="card-body">
-            {{ballance}}
+          <div class="card-body bg-light">
+            <dl class="row">
+              <dt class="col-sm-7 col-7">Major 1</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.major1|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Major 2</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.major2|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Major 3</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.major3|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Nursing</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.nurs_prog|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Cohort Year</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.cohort_yr|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Cohort Cat</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.cohort_ctgry|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Standing</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.acst|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Grad Year</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.plan_grad_yr|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Grad Sess</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.plan_grad_sess|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Degree</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.deg|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">TLE</dt>
+              <dd class="col-sm-4 col-4">{{enrollment.tle|default:"&nbsp;"}}</dd>
+            </dl>
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mb-3">
-        <div class="card">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+        <div class="card h-100">
+          <div class="card-header clearfix small z-1 alert-warning">
+            <span class="float-left">
+              Balances
+            </span>
+            <span class="float-right">
+              <i class="fa fa-balance-scale"></i>
+            </span>
+          </div>
+          <div class="card-body bg-light">
+            <dl class="row">
+              <dt class="col-sm-7 col-7">Subs</dt>
+              <dd class="col-sm-4 col-4">{{balances.subs|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Bal act</dt>
+              <dd class="col-sm-4 col-4">{{balances.bal_act|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">DP Terms</dt>
+              <dd class="col-sm-4 col-4">{{balances.def_pmt_terms|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Stat</dt>
+              <dd class="col-sm-4 col-4">{{balances.stat|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Ent No</dt>
+              <dd class="col-sm-4 col-4">{{balances.ent_no|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">CR Rating</dt>
+              <dd class="col-sm-4 col-4">{{balances.cr_rating|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Descr</dt>
+              <dd class="col-sm-4 col-4">{{balances.descr|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Dun Letter</dt>
+              <dd class="col-sm-4 col-4">{{balances.dunning_letter|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Interest Wvd</dt>
+              <dd class="col-sm-4 col-4">{{balances.interest_wvd|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Written Off</dt>
+              <dd class="col-sm-4 col-4">{{balances.written_off|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Collect Agc</dt>
+              <dd class="col-sm-4 col-4">{{balances.collect_agc|default:"&nbsp;"}}</dd>
+              <dt class="col-sm-7 col-7">Payment Grp</dt>
+              <dd class="col-sm-4 col-4">{{balances.ccresrc|default:"&nbsp;"}}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-4">
+        <div class="card h-100">
           <div class="card-header clearfix small z-1 alert-warning">
             <span class="float-left">
               Notes
             </span>
+            <span class="float-right">
+              <i class="fa fa-clipboard"></i>
+            </span>
           </div>
-          <div class="card-body">
+          <div class="card-body bg-light">
             {{notes}}
           </div>
         </div>
@@ -57,6 +118,9 @@
           <div class="card-header clearfix small z-1 alert-success">
             <span class="float-left">
               Enrolled Sessions
+            </span>
+            <span class="float-right">
+              <i class="fa fa-wpforms"></i>
             </span>
           </div>
           <div class="card-body">
