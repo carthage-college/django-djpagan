@@ -24,7 +24,7 @@ WHERE
 
 ACCOUNT_NOTES = '''
 SELECT
-    suba_rec.subs, suba_rec.id, suba_blob.*
+    suba_rec.subs, suba_rec.id, suba_blob.comm
 FROM
     suba_blob, suba_rec
 WHERE
