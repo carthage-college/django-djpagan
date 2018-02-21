@@ -177,6 +177,7 @@ SERVER_MAIL=''
 # App contstants
 MANAGER_GROUP = 'StudentAccounts'
 VOID_STATUS = 'AND vch_rec.stat <> "V"'
+ORDERED_TERMS_START_DATE = '01-01-2010'
 # unit tests
 TEST_USERNAME = ''
 TEST_PASSWORD = ''
