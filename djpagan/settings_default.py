@@ -174,6 +174,19 @@ EMAIL_FAIL_SILENTLY = False
 DEFAULT_FROM_EMAIL = ''
 SERVER_EMAIL = ''
 SERVER_MAIL=''
+# App contstants
+MANAGER_GROUP = 'StudentAccounts'
+VOID_STATUS = 'AND vch_rec.stat <> "V"'
+# unit tests
+TEST_USERNAME = ''
+TEST_PASSWORD = ''
+TEST_EMAIL = ''
+TEST_STUDENT_ID = 8675309
+TEST_STUDENT_LASTNAME = 'Garcia'
+TEST_BRIDGED_COURSE_NUMBER = 'PHY 1030'
+TEST_JOURNAL_TYPE = 'CH'
+TEST_JOURNAL_NUMBER = 228
+TEST_CHEQUE_NUMBER = 666
 # logging
 LOG_FILEPATH = os.path.join(os.path.dirname(__file__), "logs/")
 LOG_FILENAME = LOG_FILEPATH + "debug.log"

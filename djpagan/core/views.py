@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
@@ -17,6 +18,9 @@ from djpagan.billing.forms import SearchJournalForm
 from djpagan.billing.forms import SearchTransactionForm
 
 from djzbar.decorators.auth import portal_auth_required
+from djzbar.utils.informix import get_session
+
+EARL = settings.INFORMIX_EARL
 
 
 @portal_auth_required(
@@ -81,7 +85,25 @@ def student_detail(request, sid):
     enrollment = get_objects(PROGRAM_ENROLLMENT(student_number=sid), True)
     balances = get_objects(SUBSIDIARY_BALANCES(student_number=sid), True)
     notes = get_objects(ACCOUNT_NOTES(student_number=sid), True)
-    details = get_objects(SESSION_DETAILS(student_number=sid), True)
+    # we have to use session method here because of the temp table
+    session = get_session(EARL)
+
+    sql = "DROP TABLE ordered_terms"
+    try:
+        session.execute(sql)
+    except:
+        pass
+
+    sql = ORDERED_TERMS_TEMP
+    session.execute(sql)
+
+    sql = SESSION_DETAILS(
+        student_number = sid,
+    )
+
+    details = session.execute(sql).first()
+
+    session.close()
 
     return render(
         request, 'core/detail_student.html', {

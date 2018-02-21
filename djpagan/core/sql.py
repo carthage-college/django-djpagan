@@ -1,3 +1,6 @@
+from django.conf import settings
+
+
 PROGRAM_ENROLLMENT = '''
 SELECT
     id_rec.id, trim(firstname) as firstname, trim(lastname) as lastname,
@@ -13,7 +16,7 @@ AND
 
 SUBSIDIARY_BALANCES = '''
 SELECT
-    subs, bal_act, def_pmt_terms, stat, ent_no, cr_rating, descr,
+    id, subs, bal_act, def_pmt_terms, stat, ent_no, cr_rating, descr,
     dunning_letter, interest_wvd, written_off, collect_agc,
     ccresrc as payment_group
 FROM
@@ -37,9 +40,9 @@ AND
 
 SESSION_DETAILS = '''
 SELECT
-    stu_acad_rec.sess, stu_acad_rec.yr, stu_acad_rec.prog,
+    stu_acad_rec.id, stu_acad_rec.sess, stu_acad_rec.yr, stu_acad_rec.prog,
     stu_acad_rec.subprog,
-    -- ordered_terms.latest,
+    ordered_terms.latest,
     stu_acad_rec.cl, stu_acad_rec.reg_stat, stu_acad_rec.reg_hrs,
     stu_acad_rec.acst, stu_acad_rec.fin_clr,
     stu_serv_rec.rsv_stat, stu_serv_rec.offcampus_res_appr,
@@ -60,15 +63,19 @@ ON (
     AND
     stu_acad_rec.sess = stu_serv_rec.sess
 )
+, ordered_terms
 WHERE
     1 = 1
--- AND stu_acad_rec.yr = ordered_terms.yr
--- AND stu_acad_rec.sess = ordered_terms.sess
--- AND stu_acad_rec.prog = ordered_terms.prog
+AND
+    stu_acad_rec.yr = ordered_terms.yr
+AND
+    stu_acad_rec.sess = ordered_terms.sess
+AND
+    stu_acad_rec.prog = ordered_terms.prog
 AND
     stu_acad_rec.id = {student_number}
 ORDER BY
-    stu_acad_rec.id
+    ordered_terms.latest desc;
 '''.format
 
 SEARCH_STUDENTS = '''
@@ -101,13 +108,13 @@ SELECT
 FROM
     acad_cal_rec
 WHERE
-    beg_date > '2010-01-01'
+    beg_date >  "{}"
 AND
-    end_date < current
+    end_date < CURRENT
 AND
     subsess = ""
 ORDER BY
     end_date DESC
 INTO TEMP
     ordered_terms
-'''
+'''.format(settings.ORDERED_TERMS_START_DATE)

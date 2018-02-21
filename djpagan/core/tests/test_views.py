@@ -4,14 +4,24 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Group
+from djpagan.core.sql import ACCOUNT_NOTES
+from djpagan.core.sql import ORDERED_TERMS_TEMP
+from djpagan.core.sql import PROGRAM_ENROLLMENT
+from djpagan.core.sql import SESSION_DETAILS
+from djpagan.core.sql import SUBSIDIARY_BALANCES
+from djpagan.core.utils import get_objects
 
 from djtools.utils.logging import seperator
+
+from djzbar.utils.informix import get_session
 
 
 class CoreViewsTestCase(TestCase):
 
     def setUp(self):
 
+        self.sid = settings.TEST_STUDENT_ID
+        self.earl = settings.INFORMIX_EARL
         self.username = settings.TEST_USERNAME
         self.email = settings.TEST_EMAIL
         self.password = settings.TEST_PASSWORD
@@ -49,16 +59,14 @@ class CoreViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         #print "{}".format(home.content)
 
-    def test_most_recent_term(self):
+    def test_student_detail(self):
         print "\n"
-        print "Most Recent Term"
+        print "Student Detail"
+        sid = settings.TEST_STUDENT_ID
         seperator()
-        earl = reverse('most_recent_term')
-        print earl
+        earl = reverse('student_detail', args=[sid])
         # get page
         response = self.client.get(earl, follow=True)
-        print "redirect chain".format(response.redirect_chain)
-        print "status code: {}".format(response.status_code)
         self.assertEqual(response.status_code, 200)
 
         # attempt to sign in with client login method
@@ -69,19 +77,35 @@ class CoreViewsTestCase(TestCase):
         response = self.client.get(earl)
         self.assertEqual(response.status_code, 200)
 
-        sid = settings.TEST_STUDENT_ID
         student = self.client.post(
             earl, {'student_number': sid}
         )
 
-        print "status code: {}".format(student.status_code)
-        print "user ID: {}".format(student.context['user'].id)
-        print "rendered form:\n"
-        print student.context['form']
-        print "student data:\n"
-        print student.context['student']
+        enrollment = get_objects(PROGRAM_ENROLLMENT(student_number=sid), True)
+        balances = get_objects(SUBSIDIARY_BALANCES(student_number=sid), True)
+        notes = get_objects(ACCOUNT_NOTES(student_number=sid), True)
 
-        #session = self.client.session
-        #print session
+        session = get_session(self.earl)
 
-        self.assertEqual(student.context['student'][0].id, sid)
+        sql = "DROP TABLE ordered_terms"
+        try:
+            session.execute(sql)
+            print "ordered_terms table dropped"
+        except:
+            print "ordered_terms table not found"
+
+        sql = ORDERED_TERMS_TEMP
+        session.execute(sql)
+
+        sql = SESSION_DETAILS(
+            student_number = self.sid
+        )
+
+        details = session.execute(sql).first()
+
+        self.assertEqual(enrollment.id, sid)
+        self.assertEqual(balances.id, sid)
+        if notes:
+            self.assertEqual(notes.id, sid)
+        self.assertEqual(details.id, sid)
+

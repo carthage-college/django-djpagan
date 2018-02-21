@@ -1,3 +1,6 @@
+--
+-- PROGRAM_ENROLLMENT
+--
 SELECT
     id_rec.id, trim(firstname) as firstname, trim(lastname) as lastname,
     prog, subprog, major1, major2, major3, nurs_prog, cl, cohort_yr,
@@ -8,18 +11,22 @@ WHERE
     id_rec.id = prog_enr_rec.id
 AND
     id_rec.id =
-
+--
+-- SUBSIDIARY_BALANCES
+--
 SELECT
-    subs, bal_act, def_pmt_terms, stat, ent_no, cr_rating, descr,
+    id, subs, bal_act, def_pmt_terms, stat, ent_no, cr_rating, descr,
     dunning_letter, interest_wvd, written_off, collect_agc,
     ccresrc as payment_group
 FROM
     suba_rec
 WHERE
     id =
-
+--
+-- ACCOUNT_NOTES
+--
 SELECT
-    suba_rec.subs, suba_rec.id, suba_blob.*
+    suba_rec.subs, suba_rec.id, suba_blob.comm
 FROM
     suba_blob, suba_rec
 WHERE
@@ -28,9 +35,11 @@ AND
     suba_blob.comm is not null
 AND
     suba_rec.id =
-
+--
+-- SESSION_DETAILS
+--
 SELECT
-    stu_acad_rec.sess, stu_acad_rec.yr, stu_acad_rec.prog,
+    stu_acad_rec.id, stu_acad_rec.sess, stu_acad_rec.yr, stu_acad_rec.prog,
     stu_acad_rec.subprog,
     -- ordered_terms.latest,
     stu_acad_rec.cl, stu_acad_rec.reg_stat, stu_acad_rec.reg_hrs,
@@ -62,7 +71,9 @@ AND
     stu_acad_rec.id =
 ORDER BY
     stu_acad_rec.id
-
+--
+-- SEARCH_STUDENTS
+--
 SELECT
      id_rec.id, trim(firstname) as firstname, trim(lastname) as lastname,
      prog, subprog, cl, nurs_prog, cohort_yr,
@@ -83,7 +94,9 @@ AND
     prog_enr_rec.acst = "GOOD"
 ORDER BY
     lastname, firstname
-
+--
+-- ORDERED_TERMS_TEMP
+--
 SELECT
     rank() over (order by end_date) as latest,
     prog, yr, sess, subsess, acyr, beg_date, end_date
