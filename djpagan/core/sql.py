@@ -38,6 +38,24 @@ AND
     suba_rec.id = {student_number}
 '''.format
 
+ORDERED_TERMS_TEMP = '''
+SELECT
+    rank() over (order by end_date) as latest,
+    prog, yr, sess, subsess, acyr, beg_date, end_date
+FROM
+    acad_cal_rec
+WHERE
+    beg_date >  "{}"
+AND
+    end_date < CURRENT
+AND
+    subsess = ""
+ORDER BY
+    end_date DESC
+INTO TEMP
+    ordered_terms
+'''.format(settings.ORDERED_TERMS_START_DATE)
+
 SESSION_DETAILS = '''
 SELECT
     stu_acad_rec.id, stu_acad_rec.sess, stu_acad_rec.yr, stu_acad_rec.prog,
@@ -100,21 +118,3 @@ AND
 ORDER BY
     lastname, firstname
 '''.format
-
-ORDERED_TERMS_TEMP = '''
-SELECT
-    rank() over (order by end_date) as latest,
-    prog, yr, sess, subsess, acyr, beg_date, end_date
-FROM
-    acad_cal_rec
-WHERE
-    beg_date >  "{}"
-AND
-    end_date < CURRENT
-AND
-    subsess = ""
-ORDER BY
-    end_date DESC
-INTO TEMP
-    ordered_terms
-'''.format(settings.ORDERED_TERMS_START_DATE)

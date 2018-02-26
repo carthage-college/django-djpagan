@@ -36,12 +36,30 @@ AND
 AND
     suba_rec.id =
 --
+-- ORDERED_TERMS_TEMP
+--
+SELECT
+    rank() over (order by end_date) as latest,
+    prog, yr, sess, subsess, acyr, beg_date, end_date
+FROM
+    acad_cal_rec
+WHERE
+    beg_date > '2010-01-01'
+AND
+    end_date < CURRENT
+AND
+    subsess = ""
+ORDER BY
+    end_date DESC
+INTO TEMP
+    ordered_terms
+--
 -- SESSION_DETAILS
 --
 SELECT
     stu_acad_rec.id, stu_acad_rec.sess, stu_acad_rec.yr, stu_acad_rec.prog,
     stu_acad_rec.subprog,
-    -- ordered_terms.latest,
+    ordered_terms.latest,
     stu_acad_rec.cl, stu_acad_rec.reg_stat, stu_acad_rec.reg_hrs,
     stu_acad_rec.acst, stu_acad_rec.fin_clr,
     stu_serv_rec.rsv_stat, stu_serv_rec.offcampus_res_appr,
@@ -62,15 +80,16 @@ ON (
     AND
     stu_acad_rec.sess = stu_serv_rec.sess
 )
+, ordered_terms
 WHERE
     1 = 1
--- AND stu_acad_rec.yr = ordered_terms.yr
--- AND stu_acad_rec.sess = ordered_terms.sess
--- AND stu_acad_rec.prog = ordered_terms.prog
+AND stu_acad_rec.yr = ordered_terms.yr
+AND stu_acad_rec.sess = ordered_terms.sess
+AND stu_acad_rec.prog = ordered_terms.prog
 AND
     stu_acad_rec.id =
 ORDER BY
-    stu_acad_rec.id
+    ordered_terms.latest desc;
 --
 -- SEARCH_STUDENTS
 --
@@ -94,21 +113,3 @@ AND
     prog_enr_rec.acst = "GOOD"
 ORDER BY
     lastname, firstname
---
--- ORDERED_TERMS_TEMP
---
-SELECT
-    rank() over (order by end_date) as latest,
-    prog, yr, sess, subsess, acyr, beg_date, end_date
-FROM
-    acad_cal_rec
-WHERE
-    beg_date > '2010-01-01'
-AND
-    end_date < current
-AND
-    subsess = ""
-ORDER BY
-    end_date DESC
-INTO TEMP
-    ordered_terms
