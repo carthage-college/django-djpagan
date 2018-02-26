@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse_lazy
 from djpagan.core.sql import SUBSIDIARY_BALANCES
 from djpagan.core.sql import PROGRAM_ENROLLMENT
 from djpagan.core.sql import ACCOUNT_NOTES
-from djpagan.core.sql import ORDERED_TERMS_TEMP
 from djpagan.core.sql import SESSION_DETAILS
 from djpagan.core.sql import SEARCH_STUDENTS
 
@@ -88,17 +87,9 @@ def student_detail(request, sid):
     # we have to use session method here because of the temp table
     session = get_session(EARL)
 
-    sql = "DROP TABLE ordered_terms"
-    try:
-        session.execute(sql)
-    except:
-        pass
-
-    sql = ORDERED_TERMS_TEMP
-    session.execute(sql)
-
     sql = SESSION_DETAILS(
         student_number = sid,
+        start_date = settings.ORDERED_TERMS_START_DATE
     )
 
     details = session.execute(sql).first()

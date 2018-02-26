@@ -1,6 +1,3 @@
-from django.conf import settings
-
-
 PROGRAM_ENROLLMENT = '''
 SELECT
     id_rec.id, trim(firstname) as firstname, trim(lastname) as lastname,
@@ -38,24 +35,6 @@ AND
     suba_rec.id = {student_number}
 '''.format
 
-ORDERED_TERMS_TEMP = '''
-SELECT
-    rank() over (order by end_date) as latest,
-    prog, yr, sess, subsess, acyr, beg_date, end_date
-FROM
-    acad_cal_rec
-WHERE
-    beg_date >  "{}"
-AND
-    end_date < CURRENT
-AND
-    subsess = ""
-ORDER BY
-    end_date DESC
-INTO TEMP
-    ordered_terms
-'''.format(settings.ORDERED_TERMS_START_DATE)
-
 SESSION_DETAILS = '''
 SELECT
     stu_acad_rec.id, stu_acad_rec.sess, stu_acad_rec.yr, stu_acad_rec.prog,
@@ -81,17 +60,25 @@ ON (
     AND
     stu_acad_rec.sess = stu_serv_rec.sess
 )
-, ordered_terms
+, (SELECT
+    rank() over (order by end_date) as latest,
+    prog, yr, sess, subsess, acyr, beg_date, end_date
+FROM
+    acad_cal_rec
 WHERE
-    1 = 1
+    beg_date > "{start_date}"
+AND
+    end_date < CURRENT
+AND
+    subsess = "") ordered_terms
+WHERE
+    stu_acad_rec.id = {student_number}
 AND
     stu_acad_rec.yr = ordered_terms.yr
 AND
     stu_acad_rec.sess = ordered_terms.sess
 AND
     stu_acad_rec.prog = ordered_terms.prog
-AND
-    stu_acad_rec.id = {student_number}
 ORDER BY
     ordered_terms.latest desc;
 '''.format

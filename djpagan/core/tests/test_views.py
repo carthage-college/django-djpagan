@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Group
 from djpagan.core.sql import ACCOUNT_NOTES
-from djpagan.core.sql import ORDERED_TERMS_TEMP
 from djpagan.core.sql import PROGRAM_ENROLLMENT
 from djpagan.core.sql import SESSION_DETAILS
 from djpagan.core.sql import SUBSIDIARY_BALANCES
@@ -86,18 +85,9 @@ class CoreViewsTestCase(TestCase):
 
         session = get_session(self.earl)
 
-        sql = "DROP TABLE ordered_terms"
-        try:
-            session.execute(sql)
-            print "ordered_terms table dropped"
-        except:
-            print "ordered_terms table not found"
-
-        sql = ORDERED_TERMS_TEMP
-        session.execute(sql)
-
         sql = SESSION_DETAILS(
-            student_number = self.sid
+            student_number = self.sid,
+            start_date = settings.ORDERED_TERMS_START_DATE
         )
 
         details = session.execute(sql).first()
