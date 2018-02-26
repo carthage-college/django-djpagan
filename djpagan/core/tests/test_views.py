@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.test import Client
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
