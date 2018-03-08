@@ -24,7 +24,7 @@ EARL = settings.INFORMIX_EARL
 def student_balance_late_fee(request):
 
     if request.POST:
-        form = StudentNumberForm(request.POST)
+        form = StudentNumberForm(request.POST, prefix='late_fee')
         if form.is_valid():
             cd = form.cleaned_data
             # create database session
@@ -63,7 +63,7 @@ def student_balance_late_fee(request):
             return response
 
     else:
-        form = StudentNumberForm()
+        form = StudentNumberForm(prefix='late_fee')
 
 
     return render(
