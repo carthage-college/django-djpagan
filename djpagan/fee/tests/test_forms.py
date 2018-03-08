@@ -9,18 +9,18 @@ from djpagan.core.forms import StudentNumberForm
 from djtools.utils.logging import seperator
 
 
-class CoreFormsTestCase(TestCase):
+class FeeFormsTestCase(TestCase):
 
     def setUp(self):
         pass
 
-    def test_student_detail_valid_data(self):
+    def test_student_balance_late_fee_data(self):
         form = StudentNumberForm({
             'student_number': settings.TEST_STUDENT_ID,
         })
         self.assertTrue(form.is_valid())
 
-    def test_student_detail_invalid_data(self):
+    def test_student_balance_late_fee_invalid_data(self):
         form = StudentNumberForm({
             'student_number': '867-5309',
         })
@@ -29,7 +29,7 @@ class CoreFormsTestCase(TestCase):
             'student_number': ['Enter a whole number.'],
         })
 
-    def test_student_detail_blank_data(self):
+    def test_student_balance_late_fee_blank_data(self):
         form = StudentNumberForm({})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors, {

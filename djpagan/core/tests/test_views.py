@@ -7,7 +7,7 @@ from djpagan.core.sql import ACCOUNT_NOTES
 from djpagan.core.sql import PROGRAM_ENROLLMENT
 from djpagan.core.sql import SESSION_DETAILS
 from djpagan.core.sql import SUBSIDIARY_BALANCES
-from djpagan.core.utils import get_objects
+from djpagan.core.utils import create_test_user, get_objects
 
 from djtools.utils.logging import seperator
 
@@ -20,33 +20,19 @@ class CoreViewsTestCase(TestCase):
 
         self.sid = settings.TEST_STUDENT_ID
         self.earl = settings.INFORMIX_EARL
-        self.username = settings.TEST_USERNAME
-        self.email = settings.TEST_EMAIL
-        self.password = settings.TEST_PASSWORD
-        self.user = User.objects.create_user(
-            self.username, self.email, self.password
-        )
-
-        # add to student accounts group
-        sa = Group.objects.create(name=settings.MANAGER_GROUP)
-        sa.user_set.add(self.user)
-        # cred dict
-        self.credentials = {
-            'username': self.username,
-            'password': self.password
-        }
+        self.user = create_test_user()
 
     def test_home(self):
-        print "\n"
-        print "Home Page"
+        print("\n")
+        print("Home Page")
         seperator()
         earl = reverse('home')
-        print earl
+        print(earl)
         # get home page
         response = self.client.get(earl)
         self.assertEqual(response.status_code, 302)
         # redirect to sign in page
-        print "redirect to sign in at {}".format(response['location'])
+        print("redirect to sign in at {}".format(response['location']))
 
         # attempt to sign in with client login method
         login = self.client.login(
@@ -55,11 +41,10 @@ class CoreViewsTestCase(TestCase):
         self.assertTrue(login)
         response = self.client.get(earl)
         self.assertEqual(response.status_code, 200)
-        #print "{}".format(home.content)
 
     def test_student_detail(self):
-        print "\n"
-        print "Student Detail"
+        print("\n")
+        print("Student Detail")
         sid = settings.TEST_STUDENT_ID
         seperator()
         earl = reverse('student_detail', args=[sid])

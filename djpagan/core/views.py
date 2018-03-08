@@ -9,7 +9,7 @@ from djpagan.core.sql import ACCOUNT_NOTES
 from djpagan.core.sql import SESSION_DETAILS
 from djpagan.core.sql import SEARCH_STUDENTS
 
-from djpagan.core.forms import SearchStudentsForm, StudentDetailForm
+from djpagan.core.forms import SearchStudentsForm
 from djpagan.core.utils import get_objects
 from djpagan.billing.forms import SearchBridgedForm
 from djpagan.billing.forms import SearchChequeForm

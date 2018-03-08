@@ -55,6 +55,9 @@ class CoreSQLTestCase(TestCase):
             details.id, self.sid
         )
 
+        session.close()
+
+
     def test_program_enrollment_sql(self):
 
         sql = PROGRAM_ENROLLMENT(

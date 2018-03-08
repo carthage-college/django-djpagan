@@ -51,6 +51,10 @@ urlpatterns = [
     url(
         r'^billing/', include('djpagan.billing.urls')
     ),
+    # billing search and reports
+    url(
+        r'^fee/', include('djpagan.fee.urls')
+    ),
     # search students by various parameters
     url(
         r'^student/search/$', views.search_students,

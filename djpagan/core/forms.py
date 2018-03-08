@@ -2,7 +2,7 @@
 from django import forms
 
 
-class StudentDetailForm(forms.Form):
+class StudentNumberForm(forms.Form):
 
     student_number = forms.IntegerField(
         label = "Student ID",
