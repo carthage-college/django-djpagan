@@ -95,8 +95,6 @@ AND
     stu_acad_rec.id = latest_term.id
 AND
     sa.id = id_rec.id
-AND
-    sa.id = {student_number}
 ORDER BY
     latest_term.latest DESC, sa.id;
-'''.format
+'''

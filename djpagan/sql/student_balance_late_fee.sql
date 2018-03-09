@@ -92,6 +92,6 @@ AND
 AND
     sa.id = id_rec.id
 AND
-    sa.id = 1404156
+    sa.id =
 ORDER BY
     latest_term.latest DESC, sa.id;
