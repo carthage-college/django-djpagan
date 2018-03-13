@@ -3,9 +3,14 @@ from django.shortcuts import render
 from django.template import loader
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
-
-from djpagan.fee.sql import LATEST_TERM_TEMP
+# order in which we execute them
 from djpagan.fee.sql import ORDERED_TERMS_TEMP
+from djpagan.fee.sql import LATEST_TERM_TEMP
+from djpagan.fee.sql import SA_BALANCES_TEMP
+from djpagan.fee.sql import PC_BALANCES_TEMP
+from djpagan.fee.sql import CA_BALANCES_TEMP
+from djpagan.fee.sql import CA1_BALANCES_TEMP
+from djpagan.fee.sql import WO_BALANCES_TEMP
 from djpagan.fee.sql import STUDENT_BALANCE_LATE_FEE
 
 from djzbar.decorators.auth import portal_auth_required
@@ -33,11 +38,24 @@ def student_balance_late_fee(request):
         session.execute(sql)
 
         # latest terms temp table
-        sql = LATEST_TERM_TEMP
-        session.execute(sql)
+        session.execute(LATEST_TERM_TEMP)
+
+        # sa balances temp table
+        session.execute(SA_BALANCES_TEMP)
+
+        # pc balances temp table
+        session.execute(PC_BALANCES_TEMP)
+
+        # ca balances temp table
+        session.execute(CA_BALANCES_TEMP)
+
+        # ca1 balances temp table
+        session.execute(CA1_BALANCES_TEMP)
+
+        # wo balances temp table
+        session.execute(WO_BALANCES_TEMP)
 
         # student balance late fee
-
         students = session.execute(STUDENT_BALANCE_LATE_FEE)
 
         response = HttpResponse(content_type='text/csv')
