@@ -5,6 +5,26 @@ Django settings for project.
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from djzbar.settings import INFORMIX_EARL_PROD as INFORMIX_EARL
+from djzbar.settings import JX_EARL_PROD
+from djzbar.settings import JX_EARL_TEST
+# sqlserver connection string
+MSSQL_EARL = 'DSN=MSSQL-PYTHON;UID=ICSNetUser;PWD=DCyhDeuA'
+
+# informix environment for shell scripts that run under cron
+INFORMIXSERVER = ''
+DBSERVERNAME = ''
+INFORMIXDIR = ''
+ODBCINI = ''
+ONCONFIG = ''
+INFORMIXSQLHOSTS = ''
+LD_LIBRARY_PATH = '{}/lib:{}/lib/esql:{}/lib/tools:/usr/lib/apache2/modules:{}/lib/cli'.format(
+    INFORMIXDIR,INFORMIXDIR,INFORMIXDIR,INFORMIXDIR
+)
+LD_RUN_PATH = '/{}/lib:{}/lib/esql:{}/lib/tools:/usr/lib/apache2/modules'.format(
+    INFORMIXDIR,INFORMIXDIR,INFORMIXDIR
+)
+
 # Debug
 #DEBUG = False
 DEBUG = True
