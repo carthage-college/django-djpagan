@@ -9,7 +9,7 @@ from djzbar.settings import INFORMIX_EARL_PROD as INFORMIX_EARL
 from djzbar.settings import JX_EARL_PROD
 from djzbar.settings import JX_EARL_TEST
 # sqlserver connection string
-MSSQL_EARL = 'DSN=MSSQL-PYTHON;UID=ICSNetUser;PWD=DCyhDeuA'
+MSSQL_EARL = ''
 
 # informix environment for shell scripts that run under cron
 INFORMIXSERVER = ''
