@@ -55,6 +55,10 @@ urlpatterns = [
     url(
         r'^fee/', include('djpagan.fee.urls')
     ),
+    # financial aid
+    url(
+        r'^financial-aid/', include('djpagan.financialaid.urls')
+    ),
     # search students by various parameters
     url(
         r'^student/search/$', views.search_students,
