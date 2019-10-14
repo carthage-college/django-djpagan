@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.views.generic import TemplateView
 
-from djequis.core.financialaid import views
+from djpagan.financialaid import views
 
 
 urlpatterns = [

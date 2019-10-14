@@ -18,7 +18,7 @@ DEBUG = settings.INFORMIX_DEBUG
 
 
 @portal_auth_required(
-    group='carthageStaffStatus', session_var='DJEQUIS_AUTH',
+    group='carthageStaffStatus', session_var='DJPAGAN_AUTH',
     redirect_url=reverse_lazy('access_denied')
 )
 def wisact284(request):
@@ -57,6 +57,6 @@ def wisact284(request):
         form = WisAct284Form()
 
     return render(
-        request, 'core/financialaid/wisact284.html',
+        request, 'financialaid/wisact284.html',
         {'form':form, 'objects':objects, 'sql':sql}
     )
