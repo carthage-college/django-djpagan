@@ -51,15 +51,15 @@ LIVEWHALE_API_URL = "https://{}".format(SERVER_URL)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_DIR = os.path.dirname(__file__)
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-STATIC_URL = "/static/djskeletor/"
-ROOT_URL = "/djskeletor/"
+STATIC_URL = "/static/djpagan/"
+ROOT_URL = '/business-services/djpagan/'
 MEDIA_ROOT = '{}/assets/'.format(ROOT_DIR)
 STATIC_ROOT = '{}/static/'.format(ROOT_DIR)
 MEDIA_URL = '{}assets/'.format(STATIC_URL)
 UPLOADS_DIR = "{}files/".format(MEDIA_ROOT)
 UPLOADS_URL = "{}files/".format(MEDIA_URL)
-ROOT_URLCONF = 'djskeletor.core.urls'
-WSGI_APPLICATION = 'djskeletor.wsgi.application'
+ROOT_URLCONF = 'djpagan.core.urls'
+WSGI_APPLICATION = 'djpagan.wsgi.application'
 STATICFILES_DIRS = ()
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -71,7 +71,7 @@ DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'NAME': 'django_djskeletor',
+        'NAME': 'django_djpagan',
         'ENGINE': 'django.db.backends.mysql',
         #'ENGINE': 'django.db.backends.dummy',
         'USER': '',
@@ -88,9 +88,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'djskeletor',
-    'djskeletor.core',
-    'djskeletor.myapp',
+    'djpagan',
     # needed for template tags
     'djtools',
 )
@@ -143,9 +141,9 @@ CACHES = {
         #'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         #'LOCATION': '127.0.0.1:11211',
         #'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        #'LOCATION': '/var/tmp/django_djskeletor_cache',
+        #'LOCATION': '/var/tmp/django_djpagan_cache',
         #'TIMEOUT': 60*20,
-        #'KEY_PREFIX': "DJSKELETOR_",
+        #'KEY_PREFIX': "DJPAGAN_",
         #'OPTIONS': {
         #    'MAX_ENTRIES': 80000,
         #}
@@ -182,7 +180,7 @@ USE_X_FORWARDED_HOST = True
 #SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_DOMAIN=".carthage.edu"
-SESSION_COOKIE_NAME ='django_djskeletor_cookie'
+SESSION_COOKIE_NAME ='django_djpagan_cookie'
 SESSION_COOKIE_AGE = 86400
 # SMTP settings
 EMAIL_HOST = ''
@@ -254,7 +252,7 @@ LOGGING = {
         }
     },
     'loggers': {
-        'djskeletor': {
+        'djpagan': {
             'handlers':['logfile'],
             'propagate': True,
             'level':'DEBUG',
