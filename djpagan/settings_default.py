@@ -192,10 +192,12 @@ EMAIL_FAIL_SILENTLY = False
 DEFAULT_FROM_EMAIL = ''
 SERVER_EMAIL = ''
 SERVER_MAIL=''
-# App contstants
+# App constants
 MANAGER_GROUP = 'StudentAccounts'
 VOID_STATUS = 'AND vch_rec.stat <> "V"'
 ORDERED_TERMS_START_DATE = '01-01-2010'
+# loan disbursement
+FINANCIAL_AID_EMAIL=''
 # unit tests
 TEST_USERNAME = ''
 TEST_PASSWORD = ''
