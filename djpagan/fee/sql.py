@@ -1,12 +1,10 @@
 ORDERED_TERMS_TEMP = '''
 SELECT
-    ROW_NUMBER() OVER (ORDER BY end_date) AS latest, prog,
+    CAST( ROW_NUMBER() OVER (ORDER BY end_date) AS VARCHAR(4)) AS latest, prog,
     yr, sess, subsess, acyr, beg_date, end_date
 FROM
     acad_cal_rec
 WHERE
-    beg_date > "{start_date}"
-AND
     beg_date < CURRENT
 AND
     subsess = ""

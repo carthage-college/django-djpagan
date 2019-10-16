@@ -60,17 +60,19 @@ ON (
     AND
     stu_acad_rec.sess = stu_serv_rec.sess
 )
-, (SELECT
-    rank() over (order by end_date) as latest,
-    prog, yr, sess, subsess, acyr, beg_date, end_date
-FROM
-    acad_cal_rec
-WHERE
-    beg_date > "{start_date}"
-AND
-    end_date < CURRENT
-AND
-    subsess = "") ordered_terms
+, (
+    SELECT
+        CAST( rank() over (order by end_date) AS CHAR(12)) as latest,
+        prog, yr, sess, subsess, acyr, beg_date, end_date
+    FROM
+        acad_cal_rec
+    WHERE
+        beg_date > MDY(1,1,2010)
+    AND
+        end_date < CURRENT
+    AND
+        subsess = ""
+) ordered_terms
 WHERE
     stu_acad_rec.id = {student_number}
 AND

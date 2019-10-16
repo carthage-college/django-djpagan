@@ -1,20 +1,17 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from djpagan.financialaid.forms import WisAct284Form
 from djpagan.financialaid.sql import WIS_ACT_284_SQL
 from djpagan.financialaid.utils import csv_gen
 
-from djzbar.decorators.auth import portal_auth_required
-from djzbar.utils.informix import do_sql
+from djimix.decorators.auth import portal_auth_required
+from djimix.core.database import get_connection, xsql
 
 import csv
 import time
-
-EARL = settings.INFORMIX_EARL
-DEBUG = settings.INFORMIX_DEBUG
 
 
 @portal_auth_required(
@@ -34,7 +31,10 @@ def wisact284(request):
             if data['dispersed']:
                 stat = '"AD"'
             sql = WIS_ACT_284_SQL(amt_stat = stat)
-            objects = do_sql(sql, earl=EARL)
+            connection = get_connection()
+            # automatically closes the connection after leaving 'with' block
+            with connection:
+                objects = xsql(sql, connection, settings.INFORMIX_DEBUG).fetchall()
 
             datetimestr = time.strftime("%Y%m%d%H%M%S")
             # College Cost Meter file name

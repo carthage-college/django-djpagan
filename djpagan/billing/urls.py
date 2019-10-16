@@ -1,17 +1,13 @@
-from django.conf.urls import url
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import RedirectView, TemplateView
+from django.urls import path, re_path, reverse_lazy
+from django.views.generic import RedirectView
 
 from djpagan.billing import views
 
 
 urlpatterns = [
-    url(
+    re_path(
         r'^search/(?P<tipo>[-\w]+)/$',
         views.search, name='search_type'
     ),
-    url(
-        r'^search/$',
-        RedirectView.as_view(url=reverse_lazy('home'))
-    ),
+    path('search/', RedirectView.as_view(url=reverse_lazy('home'))),
 ]

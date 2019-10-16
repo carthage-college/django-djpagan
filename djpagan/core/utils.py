@@ -1,21 +1,22 @@
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 
-from djzbar.utils.informix import do_sql
-
-DEBUG = settings.INFORMIX_DEBUG
+from djimix.core.database import get_connection, xsql
 
 
 def get_objects(sql, sid=None):
 
-    objects = do_sql(sql, key=DEBUG)
-    if objects:
-        objects = objects.fetchall()
-        if sid:
-            try:
-                objects = objects[0]
-            except:
-                objects = None
+    connection = get_connection()
+    # automatically closes the connection after leaving 'with' block
+    with connection:
+        objects = xsql(sql, connection, settings.INFORMIX_DEBUG)
+        if objects:
+            objects = objects.fetchall()
+            if sid:
+                try:
+                    objects = objects[0]
+                except:
+                    objects = None
 
     return objects
 

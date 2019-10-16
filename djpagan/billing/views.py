@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.http import Http404
 
@@ -15,7 +15,7 @@ from djpagan.billing.sql import BRIDGED_CLASSES_STUDENTS
 from djpagan.billing.sql import CHEQUE_NUMBER
 from djpagan.billing.sql import JOURNAL_TRANSACTIONS
 
-from djzbar.decorators.auth import portal_auth_required
+from djimix.decorators.auth import portal_auth_required
 
 from djtools.utils.convert import str_to_class
 from djtools.fields import TODAY
@@ -37,7 +37,7 @@ def search(request, tipo):
     # check for a valid template or redirect home
     try:
         template = 'billing/search_{}.html'.format(tipo)
-        os.stat(os.path.join(settings.ROOT_DIR, 'templates', template))
+        os.stat(os.path.join(settings.BASE_DIR, 'templates', template))
     except:
         return HttpResponseRedirect( reverse_lazy('home') )
 

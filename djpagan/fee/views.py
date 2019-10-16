@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.template import loader
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 # order in which we execute them
 from djpagan.fee.sql import ORDERED_TERMS_TEMP
@@ -13,12 +13,10 @@ from djpagan.fee.sql import CA1_BALANCES_TEMP
 from djpagan.fee.sql import WO_BALANCES_TEMP
 from djpagan.fee.sql import STUDENT_BALANCE_LATE_FEE
 
-from djzbar.decorators.auth import portal_auth_required
-from djzbar.utils.informix import get_session
+from djimix.decorators.auth import portal_auth_required
+from djimix.core.database import get_connection, xsql
 
 import csv
-
-EARL = settings.INFORMIX_EARL
 
 
 @portal_auth_required(
@@ -28,35 +26,38 @@ EARL = settings.INFORMIX_EARL
 def student_balance_late_fee(request):
 
     if request.POST:
-        # create database session
-        session = get_session(EARL)
+        connection = get_connection()
+        # automatically closes the connection after leaving 'with' block
+        with connection:
 
-        # ordered terms temp table
-        sql = ORDERED_TERMS_TEMP(
-            start_date = settings.ORDERED_TERMS_START_DATE
-        )
-        session.execute(sql)
+            # ordered terms temp table
+            sql = ORDERED_TERMS_TEMP(
+                start_date = settings.ORDERED_TERMS_START_DATE
+            )
+            xsql(sql, connection, settings.INFORMIX_DEBUG)
 
-        # latest terms temp table
-        session.execute(LATEST_TERM_TEMP)
+            # latest terms temp table
+            xsql(LATEST_TERM_TEMP, connection, settings.INFORMIX_DEBUG)
 
-        # sa balances temp table
-        session.execute(SA_BALANCES_TEMP)
+            # sa balances temp table
+            xsql(SA_BALANCES_TEMP, connection, settings.INFORMIX_DEBUG)
 
-        # pc balances temp table
-        session.execute(PC_BALANCES_TEMP)
+            # pc balances temp table
+            xsql(PC_BALANCES_TEMP, connection, settings.INFORMIX_DEBUG)
 
-        # ca balances temp table
-        session.execute(CA_BALANCES_TEMP)
+            # ca balances temp table
+            xsql(CA_BALANCES_TEMP, connection, settings.INFORMIX_DEBUG)
 
-        # ca1 balances temp table
-        session.execute(CA1_BALANCES_TEMP)
+            # ca1 balances temp table
+            xsql(CA1_BALANCES_TEMP, connection, settings.INFORMIX_DEBUG)
 
-        # wo balances temp table
-        session.execute(WO_BALANCES_TEMP)
+            # wo balances temp table
+            xsql(WO_BALANCES_TEMP, connection, settings.INFORMIX_DEBUG)
 
-        # student balance late fee
-        students = session.execute(STUDENT_BALANCE_LATE_FEE)
+            # student balance late fee
+            students = xsql(
+                STUDENT_BALANCE_LATE_FEE, connection, settings.INFORMIX_DEBUG
+            ).fetchall()
 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename={}.csv'.format(

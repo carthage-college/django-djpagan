@@ -22,6 +22,7 @@ class SearchJournalForm(forms.Form):
         choices = [("","---journal type---")]
         for o in objects:
             choices.append((o.vch_ref, "{} {}".format(o.vch_ref,o.txt)))
+            #choices.append((o[0], "{} {}".format(o[0],o[1])))
 
         self.fields['journal_type'] = forms.ChoiceField(
             choices=choices

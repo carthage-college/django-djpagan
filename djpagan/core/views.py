@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
+from djpagan.fee.sql import ORDERED_TERMS_TEMP
 from djpagan.core.sql import SUBSIDIARY_BALANCES
 from djpagan.core.sql import PROGRAM_ENROLLMENT
 from djpagan.core.sql import ACCOUNT_NOTES
@@ -12,15 +13,14 @@ from djpagan.core.sql import SEARCH_STUDENTS
 from djpagan.core.forms import StudentNumberForm
 from djpagan.core.forms import SearchStudentsForm
 from djpagan.core.utils import get_objects
-from djpagan.billing.forms import SearchBridgedForm
+#from djpagan.billing.forms import SearchBridgedForm
 from djpagan.billing.forms import SearchChequeForm
 from djpagan.billing.forms import SearchJournalForm
 from djpagan.billing.forms import SearchTransactionForm
 
-from djzbar.decorators.auth import portal_auth_required
-from djzbar.utils.informix import get_session
-
-EARL = settings.INFORMIX_EARL
+from djimix.decorators.auth import portal_auth_required
+from djimix.settings.shell import INFORMIX_ODBC_TRAIN
+from djimix.core.database import get_connection, xsql
 
 
 @portal_auth_required(
@@ -29,7 +29,7 @@ EARL = settings.INFORMIX_EARL
 )
 def home(request):
 
-    form_bridged = SearchBridgedForm(prefix='bridged')
+    #form_bridged = SearchBridgedForm(prefix='bridged')
     form_cheque = SearchChequeForm(prefix='cheque')
     form_journal = SearchJournalForm(prefix='journal')
     form_transaction = SearchTransactionForm(prefix='transaction')
@@ -38,7 +38,7 @@ def home(request):
     return render(
         request, 'core/home.html',
         {
-            'form_bridged':form_bridged,
+            #'form_bridged':form_bridged,
             'form_cheque':form_cheque,
             'form_journal':form_journal,
             'form_transaction':form_transaction,
@@ -65,9 +65,7 @@ def search_students(request):
                     reverse_lazy('student_detail', args=[sid])
                 )
             except:
-                sql = SEARCH_STUDENTS(
-                    lastname = student
-                )
+                sql = SEARCH_STUDENTS(lastname = student)
                 students = get_objects(sql)
     else:
         form = SearchStudentsForm()
@@ -87,17 +85,17 @@ def student_detail(request, sid):
     enrollment = get_objects(PROGRAM_ENROLLMENT(student_number=sid), True)
     balances = get_objects(SUBSIDIARY_BALANCES(student_number=sid), True)
     notes = get_objects(ACCOUNT_NOTES(student_number=sid), True)
-    # we have to use session method here because of the temp table
-    session = get_session(EARL)
 
     sql = SESSION_DETAILS(
         student_number = sid,
         start_date = settings.ORDERED_TERMS_START_DATE
     )
+    connection = get_connection()
 
-    details = session.execute(sql).first()
-
-    session.close()
+    # automatically closes the connection after leaving 'with' block
+    with connection:
+        results = xsql(sql, connection, settings.INFORMIX_DEBUG)
+        details = results.fetchone()
 
     return render(
         request, 'core/detail_student.html', {

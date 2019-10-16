@@ -1,6 +1,5 @@
 from django.contrib import admin
-from django.conf.urls import include, url
-from django.core.urlresolvers import reverse_lazy
+from django.urls import include, path, re_path, reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView, TemplateView
 
@@ -16,60 +15,49 @@ handler500 = 'djtools.views.errors.server_error'
 
 urlpatterns = [
     # we don't want users created through django admin
-    url(
-        r'^admin/auth/user/add/$',
+    path(
+        'admin/auth/user/add/',
         RedirectView.as_view(url=reverse_lazy('auth_login'))
     ),
-    url(r'^admin/', include(admin.site.urls)),
     # auth
-    url(
-        r'^accounts/login/$',auth_views.login,
-        {'template_name': 'accounts/login.html'},
+    path(
+        'accounts/login/', auth_views.LoginView.as_view(),
+        {'template_name': 'registration/login.html'},
         name='auth_login'
     ),
-    url(
-        r'^accounts/logout/$',auth_views.logout,
+    path(
+        'accounts/logout/', auth_views.LogoutView.as_view(),
         {'next_page': reverse_lazy('auth_loggedout')},
         name='auth_logout'
     ),
-    url(
-        r'^accounts/loggedout/$', loggedout,
-        {'template_name': 'accounts/logged_out.html'},
+    path(
+        'accounts/loggedout/', loggedout,
+        {'template_name': 'registration/logged_out.html'},
         name='auth_loggedout'
     ),
-    url(
-        r'^accounts/$',
+    path(
+        'accounts/',
         RedirectView.as_view(url=reverse_lazy('auth_login'))
     ),
-    url(
-        r'^denied/$',
-        TemplateView.as_view(
-            template_name='denied.html'
-        ), name='access_denied'
+    path(
+        'denied/',
+        TemplateView.as_view(template_name='denied.html'), name='access_denied'
     ),
+    # django admin
+    path('admin/', admin.site.urls),
     # billing search and reports
-    url(
-        r'^billing/', include('djpagan.billing.urls')
-    ),
+    path('billing/', include('djpagan.billing.urls')),
     # billing search and reports
-    url(
-        r'^fee/', include('djpagan.fee.urls')
-    ),
+    path('fee/', include('djpagan.fee.urls')),
     # financial aid
-    url(
-        r'^financial-aid/', include('djpagan.financialaid.urls')
-    ),
+    path('financial-aid/', include('djpagan.financialaid.urls')),
     # search students by various parameters
-    url(
-        r'^student/search/$', views.search_students,
+    path('student/search/', views.search_students,
         name='search_students'
     ),
-    url(
-        r'^student/(?P<sid>\d+)/$', views.student_detail,
-        name='student_detail'
+    re_path(
+        '^student/(?P<sid>\d+)/$', views.student_detail, name='student_detail'
     ),
     # dashboard home
-    url(
-        r'^$', views.home, name='home'
-    ),
+    path('', views.home, name='home'),
 ]
