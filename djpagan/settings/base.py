@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # needed for template tags
     'djtools',
+    'bootstrap4'
 )
 MIDDLEWARE = (
     'django.middleware.cache.UpdateCacheMiddleware',
