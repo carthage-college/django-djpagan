@@ -47,7 +47,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # billing search and reports
     path('billing/', include('djpagan.billing.urls')),
-    # billing search and reports
+    # checks forms
+    path('czech/', include('djpagan.czech.urls')),
+    # fee report
     path('fee/', include('djpagan.fee.urls')),
     # financial aid
     path('financial-aid/', include('djpagan.financialaid.urls')),
