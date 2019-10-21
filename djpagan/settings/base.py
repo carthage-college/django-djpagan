@@ -55,7 +55,7 @@ DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'NAME': 'django_djsapo',
+        'NAME': 'django_djforms',
         'ENGINE': 'django.db.backends.mysql',
         #'ENGINE': 'django.db.backends.dummy',
         'USER': '',
@@ -281,7 +281,7 @@ LOGGING = {
         }
     },
     'loggers': {
-        'djsapo': {
+        'djpagan': {
             'handlers':['debug_logfile'],
             'propagate': True,
             'level':'DEBUG',
