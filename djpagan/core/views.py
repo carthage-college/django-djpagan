@@ -19,7 +19,6 @@ from djpagan.billing.forms import SearchJournalForm
 from djpagan.billing.forms import SearchTransactionForm
 
 from djimix.decorators.auth import portal_auth_required
-from djimix.settings.shell import INFORMIX_ODBC_TRAIN
 from djimix.core.database import get_connection, xsql
 
 
