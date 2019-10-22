@@ -36,7 +36,6 @@ API_URL = '{}/{}'.format(SERVER_URL, 'api')
 LIVEWHALE_API_URL = 'https://{}'.format(SERVER_URL)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_DIR = os.path.dirname(__file__)
-ADMIN_MEDIA_PREFIX = '/static/admin/'
 ROOT_URL = ''
 STATIC_ROOT = '{}/static/'.format(ROOT_DIR)
 STATIC_URL = '/static/djpagan/'
