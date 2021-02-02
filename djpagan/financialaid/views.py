@@ -7,7 +7,7 @@ from djpagan.financialaid.forms import WisAct284Form
 from djpagan.financialaid.sql import WIS_ACT_284_SQL
 from djpagan.financialaid.utils import csv_gen
 
-from djimix.decorators.auth import portal_auth_required
+from djauth.decorators import portal_auth_required
 from djimix.core.database import get_connection, xsql
 
 import csv
@@ -15,8 +15,9 @@ import time
 
 
 @portal_auth_required(
-    group='carthageStaffStatus', session_var='DJPAGAN_AUTH',
-    redirect_url=reverse_lazy('access_denied')
+    group='carthageStaffStatus',
+    session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied'),
 )
 def wisact284(request):
 

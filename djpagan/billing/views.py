@@ -15,7 +15,7 @@ from djpagan.billing.sql import BRIDGED_CLASSES_STUDENTS
 from djpagan.billing.sql import CHEQUE_NUMBER
 from djpagan.billing.sql import JOURNAL_TRANSACTIONS
 
-from djimix.decorators.auth import portal_auth_required
+from djauth.decorators import portal_auth_required
 
 from djtools.utils.convert import str_to_class
 from djtools.fields import TODAY
@@ -26,8 +26,9 @@ STATUS = settings.VOID_STATUS
 
 
 @portal_auth_required(
-    group='StudentAccounts', session_var='DJPAGAN_AUTH',
-    redirect_url=reverse_lazy('access_denied')
+    group='StudentAccounts',
+    session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied'),
 )
 def search(request, tipo):
 

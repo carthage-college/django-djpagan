@@ -13,15 +13,16 @@ from djpagan.fee.sql import CA1_BALANCES_TEMP
 from djpagan.fee.sql import WO_BALANCES_TEMP
 from djpagan.fee.sql import STUDENT_BALANCE_LATE_FEE
 
-from djimix.decorators.auth import portal_auth_required
+from djauth.decorators import portal_auth_required
 from djimix.core.database import get_connection, xsql
 
 import csv
 
 
 @portal_auth_required(
-    group='StudentAccounts', session_var='DJPAGAN_AUTH',
-    redirect_url=reverse_lazy('access_denied')
+    group='StudentAccounts',
+    session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied'),
 )
 def student_balance_late_fee(request):
 

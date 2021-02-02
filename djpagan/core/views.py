@@ -18,13 +18,14 @@ from djpagan.billing.forms import SearchChequeForm
 from djpagan.billing.forms import SearchJournalForm
 from djpagan.billing.forms import SearchTransactionForm
 
-from djimix.decorators.auth import portal_auth_required
+from djauth.decorators import portal_auth_required
 from djimix.core.database import get_connection, xsql
 
 
 @portal_auth_required(
-    group='StudentAccounts', session_var='DJPAGAN_AUTH',
-    redirect_url=reverse_lazy('access_denied')
+    group='StudentAccounts',
+    session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied'),
 )
 def home(request):
 
@@ -47,8 +48,9 @@ def home(request):
 
 
 @portal_auth_required(
-    group='StudentAccounts', session_var='DJPAGAN_AUTH',
-    redirect_url=reverse_lazy('access_denied')
+    group='StudentAccounts',
+    session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied'),
 )
 def search_students(request):
     sql = None
@@ -76,8 +78,9 @@ def search_students(request):
 
 
 @portal_auth_required(
-    group='StudentAccounts', session_var='DJPAGAN_AUTH',
-    redirect_url=reverse_lazy('access_denied')
+    group='StudentAccounts',
+    session_var='DJPAGAN_AUTH',
+    redirect_url=reverse_lazy('access_denied'),
 )
 def student_detail(request, sid):
 
