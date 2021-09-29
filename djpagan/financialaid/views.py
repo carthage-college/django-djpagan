@@ -32,17 +32,13 @@ def wisact284(request):
             if data['dispersed']:
                 stat = '"AD"'
             sql = WIS_ACT_284_SQL(amt_stat = stat)
-            connection = get_connection()
             # automatically closes the connection after leaving 'with' block
-            with connection:
+            with get_connection() as connection:
                 objects = xsql(sql, connection, settings.INFORMIX_DEBUG).fetchall()
 
             datetimestr = time.strftime("%Y%m%d%H%M%S")
             # College Cost Meter file name
-            ccmfile = (
-                'CCM-{}.csv'.format(datetimestr)
-            )
-
+            ccmfile = ('CCM-{0}.csv'.format(datetimestr))
             response = HttpResponse(content_type="text/csv; charset=utf-8")
             content = 'attachment; filename={}'.format(ccmfile)
             response['Content-Disposition'] = content

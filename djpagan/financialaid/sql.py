@@ -32,7 +32,7 @@ SELECT DISTINCT
         WHEN ACADREC.prog = 'GRAD' AND NVL(BGT_COSTS.No_TUFE,0) = 0
         THEN 10160
         WHEN ACADREC.subprog = 'TRAD' AND NVL(BGT_COSTS.No_TUFE,0) = 0
-        THEN 31500
+        THEN 33000
         WHEN ACADREC.subprog = 'TRAP' AND NVL(BGT_COSTS.No_TUFE,0) = 0
         THEN 9200
         WHEN ACADREC.subprog = 'PTSM' AND NVL(BGT_COSTS.No_TUFE,0) = 0
