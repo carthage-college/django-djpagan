@@ -5,21 +5,22 @@ Django settings for project.
 import os
 
 # sqlserver connection string
-from djimix.settings.local import MSSQL_EARL
+from djimix.settings.local import DBSERVERNAME
 from djimix.settings.local import INFORMIX_ODBC
-from djimix.settings.local import (
-    INFORMIXSERVER,
-    DBSERVERNAME,
-    INFORMIXDIR,
-    ODBCINI,
-    ONCONFIG,
-    INFORMIXSQLHOSTS,
-    LD_LIBRARY_PATH,
-    LD_RUN_PATH
-)
+from djimix.settings.local import INFORMIX_ODBC_TRAIN
+from djimix.settings.local import INFORMIXDIR
+from djimix.settings.local import INFORMIXSERVER
+from djimix.settings.local import INFORMIXSQLHOSTS
+from djimix.settings.local import LD_LIBRARY_PATH
+from djimix.settings.local import LD_RUN_PATH
+from djimix.settings.local import MSSQL_EARL
+from djimix.settings.local import ODBCINI
+from djimix.settings.local import ONCONFIG
 # Debug
-DEBUG = True
-INFORMIX_DEBUG = 'debug'
+DEBUG = False
+INFORMIX_DEBUG = ''
+# include html5 form attributes in input fields for required fields
+REQUIRED_ATTRIBUTE = True
 ADMINS = (('',''),)
 MANAGERS = ADMINS
 ALLOWED_HOSTS = []
@@ -32,17 +33,18 @@ USE_TZ = False
 DEFAULT_CHARSET = 'utf-8'
 FILE_CHARSET = 'utf-8'
 SERVER_URL = ''
-API_URL = '{}/{}'.format(SERVER_URL, 'api')
-LIVEWHALE_API_URL = 'https://{}'.format(SERVER_URL)
+API_URL = '{0}/{1}'.format(SERVER_URL, 'api')
+LIVEWHALE_API_URL = 'https://{0}'.format(SERVER_URL)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_DIR = os.path.dirname(__file__)
+PROJECT_APP = os.path.basename(BASE_DIR)
 ROOT_URL = ''
-STATIC_ROOT = '{}/static/'.format(ROOT_DIR)
+STATIC_ROOT = '{0}/static/'.format(ROOT_DIR)
 STATIC_URL = '/static/djpagan/'
-MEDIA_ROOT = '{}/assets/'.format(ROOT_DIR)
+MEDIA_ROOT = '{0}/assets/'.format(ROOT_DIR)
 MEDIA_URL = '/media/djpagan/'.format(STATIC_URL)
-UPLOADS_DIR = '{}files/'.format(MEDIA_ROOT)
-UPLOADS_URL = '{}files/'.format(MEDIA_URL)
+UPLOADS_DIR = '{0}files/'.format(MEDIA_ROOT)
+UPLOADS_URL = '{0}files/'.format(MEDIA_URL)
 ROOT_URLCONF = 'djpagan.core.urls'
 WSGI_APPLICATION = 'djpagan.wsgi.application'
 STATICFILES_DIRS = ()
@@ -325,3 +327,25 @@ LOGGING = {
         },
     }
 }
+
+##################
+# LOCAL SETTINGS #
+##################
+
+# Allow any settings to be defined in local.py which should be
+# ignored in your version control system allowing for settings to be
+# defined per machine.
+
+# Instead of doing "from .local import *", we use exec so that
+# local has full access to everything defined in this module.
+# Also force into sys.modules so it's visible to Django's autoreload.
+
+phile = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'local.py')
+if os.path.exists(phile):
+    import imp
+    import sys
+    module_name = '{0}.settings.local'.format(PROJECT_APP)
+    module = imp.new_module(module_name)
+    module.__file__ = phile
+    sys.modules[module_name] = module
+    exec(open(phile, 'rb').read())
