@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -18,7 +20,6 @@ from djpagan.billing.sql import JOURNAL_TRANSACTIONS
 from djauth.decorators import portal_auth_required
 
 from djtools.utils.convert import str_to_class
-from djtools.fields import TODAY
 
 import os
 
@@ -65,7 +66,7 @@ def search(request, tipo):
                 )
             elif tipo == 'bridged':
                 course_no = data['course_no']
-                year = TODAY.year - 2
+                year = datetime.date.today().year - 2
                 bridged = get_objects(
                     BRIDGED_CLASSES(
                         year = year,

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from django import forms
 
+import datetime
+
+from django import forms
 from djpagan.billing.sql import BRIDGED_CLASSES, JOURNAL_TYPES
 from djpagan.core.utils import get_objects
-
-from djtools.fields import TODAY
 
 
 class SearchJournalForm(forms.Form):
@@ -36,7 +36,7 @@ class SearchBridgedForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(SearchBridgedForm, self).__init__(*args, **kwargs)
 
-        year = TODAY.year - 2
+        year = datetime.date.today().year - 2
         objects = get_objects(BRIDGED_CLASSES(year = year, course_no = ''))
 
         choices = [("","---bridged classes---")]
