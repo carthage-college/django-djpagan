@@ -5,9 +5,9 @@ import sys
 sys.path.append('')
 sys.path.append('')
 # django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djpagan.settings.production")
-os.environ.setdefault("PYTHON_EGG_CACHE", "/var/cache/python/.python-eggs")
-os.environ.setdefault("TZ", "America/Chicago")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djpagan.settings.production')
+os.environ.setdefault('PYTHON_EGG_CACHE', '/var/cache/python/.python-eggs')
+os.environ.setdefault('TZ', 'America/Chicago')
 # informix
 os.environ['INFORMIXSERVER'] = ''
 os.environ['DBSERVERNAME'] = ''
