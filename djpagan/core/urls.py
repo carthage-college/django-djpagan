@@ -43,10 +43,15 @@ urlpatterns = [
         'denied/',
         TemplateView.as_view(template_name='denied.html'), name='access_denied'
     ),
-    # django admin
-    path('admin/', admin.site.urls),
+    # django admin and loginas
+    path('rocinante/', include('loginas.urls')),
+    path('rocinante/', admin.site.urls),
+    # admin honeypot
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     # billing search and reports
     path('billing/', include('djpagan.billing.urls')),
+    # recaptcha
+    path('captcha/', include('captcha.urls')),
     # checks forms
     path('czech/', include('djpagan.czech.urls')),
     # fee report
@@ -57,9 +62,12 @@ urlpatterns = [
     path('student/search/', views.search_students,
         name='search_students'
     ),
+    # student detail view
     re_path(
         '^student/(?P<sid>\d+)/$', views.student_detail, name='student_detail'
     ),
+    # tutition stuff
+    path('tuition/', include('djpagan.tuition.urls')),
     # dashboard home
     path('', views.home, name='home'),
 ]

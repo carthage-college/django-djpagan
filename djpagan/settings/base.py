@@ -33,8 +33,7 @@ USE_TZ = False
 DEFAULT_CHARSET = 'utf-8'
 FILE_CHARSET = 'utf-8'
 SERVER_URL = ''
-API_URL = '{0}/{1}'.format(SERVER_URL, 'api')
-LIVEWHALE_API_URL = 'https://{0}'.format(SERVER_URL)
+LIVEWHALE_API_URL = ''
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_DIR = os.path.dirname(__file__)
 PROJECT_APP = os.path.basename(BASE_DIR)
@@ -56,10 +55,9 @@ DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'NAME': 'django_djforms',
+        'NAME': 'django_{0}'.format(PROJECT_APP),
         'ENGINE': 'django.db.backends.mysql',
-        #'ENGINE': 'django.db.backends.dummy',
-        'USER': '',
+        'USER': PROJECT_APP,
         'PASSWORD': ''
     },
 }
@@ -71,9 +69,15 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-    # needed for template tags
+    # apps
+    'admin_honeypot',
+    'djpagan.tuition',
     'djtools',
-    'bootstrap4'
+    'django_bootstrap5',
+    'captcha',
+    'imagekit',
+    'loginas',
+    'taggit',
 )
 MIDDLEWARE = (
     'django.middleware.cache.UpdateCacheMiddleware',
@@ -93,7 +97,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            '/data2/django_templates/djkorra/',
             '/data2/django_templates/djcher/',
             '/data2/django_templates/django-djskins/',
         ],
@@ -194,11 +197,17 @@ SESSION_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_SSL_REDIRECT = True
+# simple captcha
+CAPTCHA_BACKGROUND_COLOR='#ffffff'
+CAPTCHA_FOREGROUND_COLOR='#000000'
+CAPTCHA_NOISE_FUNCTIONS=('captcha.helpers.noise_null',)
 # App contstants
 MANAGER_GROUP = 'StudentAccounts'
 VOID_STATUS = 'AND vch_rec.stat <> "V"'
 #ORDERED_TERMS_START_DATE = '01-01-2010'
 ORDERED_TERMS_START_DATE = '2010-01-01'
+# tuition remission
+TUITION_REMISSION_EMAIL_LIST = []
 # unit tests
 TEST_USERNAME = ''
 TEST_PASSWORD = ''

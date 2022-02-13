@@ -1,0 +1,41 @@
+{% block title %}
+<h2>Data from tuition remission form submission</h2>
+{% endblock %}
+{% block approved %}{% endblock %}
+<h3>
+  <a href="{{data.get_absolute_url}}">Submitter</a>
+</h3>
+<pre style="font-size:1.5em;">
+First name.................. {{data.user.first_name}}
+Last name................... {{data.user.last_name}}
+Email....................... {{data.user.email}}
+Carthage ID................. {{data.user.id}}
+Income over $60K............ {{data.income}}
+</pre>
+<h3>Student</h3>
+<pre style="font-size:1.5em;">
+Student's First Name........ {{data.first_name}}
+Student's Middle Initial.... {{data.middle_initital}}
+Student's Last Name......... {{data.last_name}}
+Student ID Number........... {{data.sid}}
+Relationship................ {{data.relationship}}
+Student Phone Number........ {{data.phone}}
+Student Email............... {{data.email}}
+Student DOB................. {{data.dob}}
+Degree seeking.............. {{data.degree}}
+Enrollment.................. {{data.enrollment}}
+Application Year............ {{data.academic_year}}
+Classification.............. {{data.classification}}
+</pre>
+<h3>Student Address</h3>
+<pre style="font-size:1.5em;">
+{{data.address}}
+</pre>
+<h3>Schools</h3>
+<pre style="font-size:1.5em;">
+{{data.schools}}
+</pre>
+<h3>Comments</h3>
+<p style="font-size:1.5em;">
+{{data.comments}}
+</p>
