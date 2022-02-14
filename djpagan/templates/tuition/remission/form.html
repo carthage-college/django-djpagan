@@ -1,4 +1,4 @@
-{% extends "djkali/base.html" %}
+{% extends "kali.html" %}
 {% load django_bootstrap5 %}
 {% block title %}Tuition Assistance Application Form{% endblock %}
 {% block extra_style %}
@@ -9,13 +9,6 @@
 {% endblock %}
 {% block content_head %}
   <h1>Tuition Assistance Application Form</h1>
-{% endblock %}
-{% block breadcrumb %}
-  <li><a href="/about/offices-services/finance-administrative-services/">Finance &amp; Administrative Services</a></li>
-  <li><a href="/about/offices-services/finance-administrative-services/policies-forms/" aria-current="page">Policies &amp; Forms</a></li>
-{% endblock %}
-{% block left_nav %}
-  {% include "includes/left_nav.html" %}
 {% endblock %}
 {% block content %}
   <div class="forms-container">

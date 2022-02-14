@@ -90,6 +90,7 @@ $(function() {
 {% endblock navbar-top-links %}
 {% block navbar-sidenav %}
 <ul class="navbar-nav navbar-sidenav">
+  {% if not user.is_anonymous %}
   <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reports">
     <a class="nav-link" href="{% url 'home' %}">
       <i class="fa fa-fw fa-table"></i>
@@ -108,6 +109,7 @@ $(function() {
       <span class="nav-link-text">WI ACT 284</span>
     </a>
   </li>
+  {% endif %}
   <li class="nav-item">
     <a class="nav-link text-center" data-toggle="tooltip" data-placement="right" title="Expand Menu" id="sidenavToggler">
       <i class="fa fa-fw fa-angle-double-left"></i>
