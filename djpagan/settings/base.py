@@ -74,7 +74,6 @@ INSTALLED_APPS = (
     'djpagan.tuition',
     'djtools',
     'django_bootstrap5',
-    'captcha',
     'imagekit',
     'loginas',
     'taggit',
@@ -98,7 +97,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             '/data2/django_templates/django-djskins/',
-            #'/data2/django_templates/djcher/',
+            '/data2/django_templates/djcher/',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -197,10 +196,6 @@ SESSION_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_SSL_REDIRECT = True
-# simple captcha
-CAPTCHA_BACKGROUND_COLOR='#ffffff'
-CAPTCHA_FOREGROUND_COLOR='#000000'
-CAPTCHA_NOISE_FUNCTIONS=('captcha.helpers.noise_null',)
 # App contstants
 MANAGER_GROUP = 'StudentAccounts'
 VOID_STATUS = 'AND vch_rec.stat <> "V"'

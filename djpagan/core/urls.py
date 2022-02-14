@@ -41,7 +41,8 @@ urlpatterns = [
     ),
     path(
         'denied/',
-        TemplateView.as_view(template_name='denied.html'), name='access_denied'
+        RedirectView.as_view(url=reverse_lazy('remission')),
+        name='access_denied',
     ),
     # django admin and loginas
     path('rocinante/', include('loginas.urls')),
@@ -50,8 +51,6 @@ urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     # billing search and reports
     path('billing/', include('djpagan.billing.urls')),
-    # recaptcha
-    path('captcha/', include('captcha.urls')),
     # checks forms
     path('czech/', include('djpagan.czech.urls')),
     # fee report

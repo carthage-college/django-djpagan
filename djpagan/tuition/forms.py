@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from captcha.fields import CaptchaField
 from django import forms
 from djpagan.tuition.models import GenericChoice
 from djpagan.tuition.models import Remission
@@ -29,7 +28,6 @@ class RemissionForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple(),
         help_text="Check all that apply.",
     )
-    captcha = CaptchaField()
 
     class Meta:
         """Information about the data class model."""
