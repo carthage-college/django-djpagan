@@ -82,11 +82,13 @@ class Remission(models.Model):
         User,
         related_name='user',
         on_delete=models.CASCADE,
+        editable=settings.DEBUG,
     )
     updated_by = models.ForeignKey(
         User,
         related_name='updated_by',
         on_delete=models.CASCADE,
+        editable=settings.DEBUG,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
     updated_at = models.DateTimeField("Date Updated", auto_now=True)
@@ -100,6 +102,7 @@ class Remission(models.Model):
     approved_email = models.BooleanField(
         default=False,
         verbose_name="Approved email sent",
+        editable=settings.DEBUG,
     )
     income = models.CharField(
         "Is the employee's adjusted gross income greater than 60,000?",
