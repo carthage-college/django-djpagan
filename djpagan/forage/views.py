@@ -28,6 +28,7 @@ def mealplan(request):
         return HttpResponseRedirect(reverse_lazy('access_denied'))
     cd = None
     mealplan = None
+    level = None
     if request.method == 'POST':
         form = MealPlanForm(
             request.POST,
@@ -115,7 +116,6 @@ def mealplan(request):
                     "Meal Plan for student with the ID {0}: {1}.".format(cid, mealplan.level),
                     extra_tags='alert-success',
                 )
-                form = MealPlanForm(use_required_attribute=settings.REQUIRED_ATTRIBUTE)
             else:
                 messages.add_message(
                     request,

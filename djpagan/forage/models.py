@@ -12,9 +12,9 @@ from taggit.managers import TaggableManager
 
 
 LOCATION_CHOICES = (
-    ('Reggie 1', 'Reggie 1'),
-    ('Reggie 2', 'Reggie 2'),
-    ('Reggie 3', 'Reggie 3'),
+    ('Meat on the Street', 'Meat on the Street'),
+    ('Parkhurst', 'Parkhurst'),
+    ('Rotating pop-up', 'Rotating pop-up'),
 )
 
 
