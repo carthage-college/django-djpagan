@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     # apps
     'admin_honeypot',
     'djpagan.tuition',
+    'djpagan.forage',
     'djtools',
     'django_bootstrap5',
     'imagekit',

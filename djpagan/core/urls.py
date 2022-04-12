@@ -57,6 +57,8 @@ urlpatterns = [
     path('fee/', include('djpagan.fee.urls')),
     # financial aid
     path('financial-aid/', include('djpagan.financialaid.urls')),
+    # meal plans
+    path('forage/', include('djpagan.forage.urls')),
     # search students by various parameters
     path('student/search/', views.search_students,
         name='search_students'
