@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from djauth.decorators import portal_auth_required
@@ -13,14 +14,18 @@ from djimix.core.utils import get_connection
 from djimix.core.utils import xsql
 from djpagan.forage.forms import MealPlanForm
 from djpagan.forage.models import MealPlan
+from djtools.utils.users import in_group
 
 
 @portal_auth_required(
+    group='Dining',
     session_var='DJPAGAN_AUTH',
     redirect_url=reverse_lazy('access_denied')
 )
 def mealplan(request):
     """Check for meal plan status."""
+    if not in_group(request.user, settings.DINING_GROUP):
+        return HttpResponseRedirect(reverse_lazy('access_denied'))
     cd = None
     mealplan = None
     if request.method == 'POST':
@@ -57,10 +62,13 @@ def mealplan(request):
                 student = xsql(sql, connection, key=settings.INFORMIX_DEBUG).fetchone()
                 if student:
                     status = True
-                    level = student.meal_plan
+                    try:
+                        level = settings.MEAL_PLANS[student.meal_plan]
+                    except Exception:
+                        level = student.meal_plan
                 else:
                     status = False
-                    level = ''
+                    lMEAL_PLANSevel = ''
                     sql = """
                         SELECT
                             cvid_rec.ldap_name as username,
@@ -107,6 +115,7 @@ def mealplan(request):
                     "Meal Plan for student with the ID {0}: {1}.".format(cid, mealplan.level),
                     extra_tags='alert-success',
                 )
+                form = MealPlanForm(use_required_attribute=settings.REQUIRED_ATTRIBUTE)
             else:
                 messages.add_message(
                     request,

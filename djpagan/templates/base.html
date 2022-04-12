@@ -15,10 +15,6 @@
 .card-header {font-size:1.2em; padding: .25rem .5rem;}
 .card-footer {padding: .25rem .5rem;}
 .card {min-height: 160px;}
-nav a {color: #cbbde2;}
-nav a:hover {color:#fff;}
-nav .input-group-btn {font-size:1.3em;}
-.navbar-toggler-icon {color:yellow;}
 .dropdown-menu {padding: 5px; background-color:#563d7c;}
 .dropdown, .dropup {padding: 3px;}
 dt, dd {line-height:.75em;}
@@ -42,6 +38,7 @@ $(function() {
     $('div#form-olvidado').toggle('500');
   });
   $("body").toggleClass("sidenav-toggled");
+  $('#id_cid').focus();
 });
 </script>
 {% endblock %}
@@ -52,7 +49,7 @@ $(function() {
 {% endblock %}
 {% block navbar-top-links %}
   <ul class="navbar-nav ml-auto">
-    {% if not user.is_anonymous %}
+    {% if not user.is_anonymous and user.is_staff %}
     <li class="nav-item">
       <form class="form-inline my-2 my-lg-0 mr-sm-3 mr-lg-3" action="{% url 'search_students' %}" method="post">
         {% csrf_token %}
@@ -91,7 +88,7 @@ $(function() {
 {% endblock navbar-top-links %}
 {% block navbar-sidenav %}
 <ul class="navbar-nav navbar-sidenav">
-  {% if not user.is_anonymous %}
+  {% if not user.is_anonymous and user.is_staff %}
   <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reports">
     <a class="nav-link" href="{% url 'home' %}">
       <i class="fa fa-fw fa-table"></i>

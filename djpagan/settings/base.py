@@ -200,7 +200,14 @@ SECURE_SSL_REDIRECT = True
 # App contstants
 MANAGER_GROUP = 'StudentAccounts'
 STUDENT_GROUP = 'carthageStudentStatus'
+DINING_GROUP = 'Dining'
 VOID_STATUS = 'AND vch_rec.stat <> "V"'
+MEAL_PLANS = {
+    'I': 'Resident - Standard',
+    'P': 'Resident - Premium',
+    'A': 'Commuter/Off-Campus - 1900 points',
+    'B': 'Commuter/Off-Campus - 950 points',
+}
 #ORDERED_TERMS_START_DATE = '01-01-2010'
 ORDERED_TERMS_START_DATE = '2010-01-01'
 # tuition remission

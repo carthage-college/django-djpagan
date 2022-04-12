@@ -1,6 +1,7 @@
 import datetime
 
 from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import render
@@ -31,6 +32,7 @@ STATUS = settings.VOID_STATUS
     session_var='DJPAGAN_AUTH',
     redirect_url=reverse_lazy('access_denied'),
 )
+@staff_member_required
 def search(request, tipo):
 
     sql = None

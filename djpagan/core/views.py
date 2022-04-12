@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -27,8 +28,8 @@ from djimix.core.database import get_connection, xsql
     session_var='DJPAGAN_AUTH',
     redirect_url=reverse_lazy('access_denied'),
 )
+@staff_member_required
 def home(request):
-
     #form_bridged = SearchBridgedForm(prefix='bridged')
     form_cheque = SearchChequeForm(prefix='cheque')
     form_journal = SearchJournalForm(prefix='journal')
@@ -52,6 +53,7 @@ def home(request):
     session_var='DJPAGAN_AUTH',
     redirect_url=reverse_lazy('access_denied'),
 )
+@staff_member_required
 def search_students(request):
     sql = None
     students = None
@@ -82,6 +84,7 @@ def search_students(request):
     session_var='DJPAGAN_AUTH',
     redirect_url=reverse_lazy('access_denied'),
 )
+@staff_member_required
 def student_detail(request, sid):
 
     enrollment = get_objects(PROGRAM_ENROLLMENT(student_number=sid), True)

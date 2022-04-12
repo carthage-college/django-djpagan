@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse_lazy
@@ -24,8 +25,8 @@ import csv
     session_var='DJPAGAN_AUTH',
     redirect_url=reverse_lazy('access_denied'),
 )
+@staff_member_required
 def student_balance_late_fee(request):
-
     if request.POST:
         connection = get_connection()
         # automatically closes the connection after leaving 'with' block
