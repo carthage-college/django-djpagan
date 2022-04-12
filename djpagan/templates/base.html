@@ -92,7 +92,7 @@ $(function() {
 {% endblock navbar-top-links %}
 {% block navbar-sidenav %}
 <ul class="navbar-nav navbar-sidenav">
-  {% ifusergroup 'Human Resources' %}
+  {% ifusergroup 'Human Resources' 'StudentAccounts' %}
   <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reports">
     <a class="nav-link" href="{% url 'home' %}">
       <i class="fa fa-fw fa-table"></i>
@@ -117,12 +117,12 @@ $(function() {
       <span class="nav-link-text">Administration</span>
     </a>
   </li>
-  {% endifusergroup %}
   <li class="nav-item">
     <a class="nav-link text-center" data-toggle="tooltip" data-placement="right" title="Expand Menu" id="sidenavToggler">
       <i class="fa fa-fw fa-angle-double-left"></i>
     </a>
   </li>
+  {% endifusergroup %}
 </ul>
 <ul class="navbar-nav sidenav-toggler">
   <li class="nav-item">

@@ -14,7 +14,6 @@ from djpagan.core.sql import SEARCH_STUDENTS
 from djpagan.core.forms import StudentNumberForm
 from djpagan.core.forms import SearchStudentsForm
 from djpagan.core.utils import get_objects
-#from djpagan.billing.forms import SearchBridgedForm
 from djpagan.billing.forms import SearchChequeForm
 from djpagan.billing.forms import SearchJournalForm
 from djpagan.billing.forms import SearchTransactionForm
@@ -30,7 +29,6 @@ from djimix.core.database import get_connection, xsql
 )
 @staff_member_required
 def home(request):
-    #form_bridged = SearchBridgedForm(prefix='bridged')
     form_cheque = SearchChequeForm(prefix='cheque')
     form_journal = SearchJournalForm(prefix='journal')
     form_transaction = SearchTransactionForm(prefix='transaction')
@@ -39,7 +37,6 @@ def home(request):
     return render(
         request, 'core/home.html',
         {
-            #'form_bridged':form_bridged,
             'form_cheque':form_cheque,
             'form_journal':form_journal,
             'form_transaction':form_transaction,

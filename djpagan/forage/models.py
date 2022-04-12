@@ -28,7 +28,11 @@ class MealPlan(models.Model):
         editable=settings.DEBUG,
     )
     created_at = models.DateTimeField("Date Created", auto_now_add=True)
-    level = models.CharField(max_length=128)
+    level = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
     status = models.BooleanField(
         verbose_name='Is the plan active?',
         default=True,
