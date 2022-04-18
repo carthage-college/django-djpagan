@@ -123,6 +123,10 @@ def mealplan(request):
                     "We could not find a student with the ID {0}.".format(cid),
                     extra_tags='alert-warning',
                 )
+            form = MealPlanForm(
+                initial={'cid': None, 'location': request.POST.get('location')},
+                use_required_attribute=settings.REQUIRED_ATTRIBUTE,
+            )
     else:
         form = MealPlanForm(use_required_attribute=settings.REQUIRED_ATTRIBUTE)
 
