@@ -1,11 +1,15 @@
-from django.contrib import admin
-from django.urls import include, path, re_path, reverse_lazy
-from django.contrib.auth import views as auth_views
-from django.views.generic import RedirectView, TemplateView
+# -*- coding: utf-8 -*-
 
+from django.contrib import admin
+from django.urls import include
+from django.urls import path
+from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
+from django.views.generic import RedirectView
+from django.views.generic import TemplateView
+from djauth.views import loggedout
 from djpagan.core import views
 
-from djauth.views import loggedout
 
 admin.autodiscover()
 
@@ -41,7 +45,10 @@ urlpatterns = [
     ),
     path(
         'denied/',
-        RedirectView.as_view(url=reverse_lazy('remission')),
+        #RedirectView.as_view(url=reverse_lazy('remission')),
+        #RedirectView.as_view(url=reverse_lazy('mealplan')),
+        TemplateView.as_view(template_name='denied.html'),
+
         name='access_denied',
     ),
     # django admin and loginas
@@ -60,13 +67,9 @@ urlpatterns = [
     # meal plans
     path('forage/', include('djpagan.forage.urls')),
     # search students by various parameters
-    path('student/search/', views.search_students,
-        name='search_students'
-    ),
+    path('student/search/', views.search_students, name='search_students'),
     # student detail view
-    re_path(
-        '^student/(?P<sid>\d+)/$', views.student_detail, name='student_detail'
-    ),
+    path('student/<int:sid>/', views.student_detail, name='student_detail'),
     # tutition stuff
     path('tuition/', include('djpagan.tuition.urls')),
     # dashboard home

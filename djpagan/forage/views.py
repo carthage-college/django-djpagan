@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import re
 
 from django.conf import settings
 from django.contrib import messages
@@ -36,7 +37,8 @@ def mealplan(request):
         )
         if form.is_valid():
             cd = form.cleaned_data
-            cid = cd['cid']
+            # remove non-numeric characters from string
+            cid = re.sub('[^0-9]', '', cd['cid'])
             sql = """
                 SELECT
                     TRIM(NVL(meal_plan_type, '')) as meal_plan,
@@ -69,7 +71,7 @@ def mealplan(request):
                         level = student.meal_plan
                 else:
                     status = False
-                    lMEAL_PLANSevel = ''
+                    level = ''
                     sql = """
                         SELECT
                             cvid_rec.ldap_name as username,
@@ -88,7 +90,7 @@ def mealplan(request):
             if student:
                 # check for an exisiting user
                 user = User.objects.filter(pk=cid).first()
-                if not user:
+                if not user and student.username:
                     password = User.objects.make_random_password(length=32)
                     user = User.objects.create(
                         pk=cid,
@@ -103,19 +105,27 @@ def mealplan(request):
                     if not user.groups.filter(name=grup).exists():
                         grup.user_set.add(user)
                     user.save()
-                # create the mealplan instance
-                mealplan = MealPlan.objects.create(
-                    user=user,
-                    level=level,
-                    status=status,
-                    location=cd['location'],
-                )
-                messages.add_message(
-                    request,
-                    messages.SUCCESS,
-                    "Meal Plan for student with the ID {0}: {1}.".format(cid, mealplan.level),
-                    extra_tags='alert-success',
-                )
+                else:
+                    messages.add_message(
+                        request,
+                        messages.WARNING,
+                        "We could not find a student with the ID {0}.".format(cid),
+                        extra_tags='alert-warning',
+                    )
+                if user:
+                    # create the mealplan instance
+                    mealplan = MealPlan.objects.create(
+                        user=user,
+                        level=level,
+                        status=status,
+                        location=cd['location'],
+                    )
+                    messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        "Meal Plan for student with the ID {0}: {1}.".format(cid, mealplan.level),
+                        extra_tags='alert-success',
+                    )
             else:
                 messages.add_message(
                     request,

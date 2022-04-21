@@ -33,7 +33,7 @@ def remission(request):
                 remission.to_list = to_list
                 to_list = [settings.MANAGERS[0][1]]
 
-            subject = "[Tuition Remission] Submission: '{0}', {1}".format(
+            subject = "[Tuition Remission] Submission: {0}, {1}".format(
                 data.user.last_name, data.user.first_name,
             )
             sent = send_mail(

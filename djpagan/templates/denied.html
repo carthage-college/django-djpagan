@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Access Denied &mdash; Carthage College{% endblock %}
+{% block content %}
+    <h2>Access Denied</h2>
+    <p>You do not have permission to access this view.</p>
+    <ul>
+      <li>
+        <a href="{% url 'mealplan' %}">Meal Plan App</a>
+      </li>
+      <li>
+        <a href="{% url 'remission' %}">Tuition Remission Form</a>
+      </li>
+    </ul>
+{% endblock %}
