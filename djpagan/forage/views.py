@@ -42,7 +42,7 @@ def mealplan(request):
             sql = """
                 SELECT
                     TRIM(NVL(meal_plan_type, '')) as meal_plan,
-                    cvid_rec.ldap_name as username,
+                    TRIM(cvid_rec.ldap_name) as username,
                     (TRIM(cvid_rec.ldap_name) || '@carthage.edu') AS email,
                     id_rec.lastname, id_rec.firstname
                 FROM
@@ -74,7 +74,7 @@ def mealplan(request):
                     level = ''
                     sql = """
                         SELECT
-                            cvid_rec.ldap_name as username,
+                            TRIM(cvid_rec.ldap_name) as username,
                             (TRIM(cvid_rec.ldap_name) || '@carthage.edu') AS email,
                             id_rec.lastname, id_rec.firstname
                         FROM
