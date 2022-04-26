@@ -132,7 +132,7 @@ def mealplan(request):
                 messages.add_message(
                     request,
                     messages.WARNING,
-                    "We could not find a student with the ID {0}.".format(cid),
+                    "We could not find a student with the ID: {0}.".format(cd['cid']),
                     extra_tags='alert-warning',
                 )
             form = MealPlanForm(
