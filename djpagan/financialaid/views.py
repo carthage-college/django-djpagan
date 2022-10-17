@@ -22,7 +22,7 @@ import time
 )
 @staff_member_required
 def wisact284(request):
-
+    """wisconsin act 284 data."""
     sql = None
     test = False
     objects = None
