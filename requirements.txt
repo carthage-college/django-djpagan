@@ -1,11 +1,9 @@
 cryptography
-django==3.2.21
-django-admin-honeypot
+django==4.2.5
 django-appconf
 django-bootstrap5
 django-imagekit
 django-localflavor
-django-loginas
 django-ranged-response
 django-taggit
 mysqlclient

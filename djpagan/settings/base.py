@@ -70,13 +70,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     # apps
-    'admin_honeypot',
     'djpagan.tuition',
     'djpagan.forage',
     'djtools',
     'django_bootstrap5',
     'imagekit',
-    'loginas',
     'taggit',
 )
 MIDDLEWARE = (

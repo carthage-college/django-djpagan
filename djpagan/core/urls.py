@@ -52,10 +52,7 @@ urlpatterns = [
         name='access_denied',
     ),
     # django admin and loginas
-    path('rocinante/', include('loginas.urls')),
     path('rocinante/', admin.site.urls),
-    # admin honeypot
-    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     # billing search and reports
     path('billing/', include('djpagan.billing.urls')),
     # checks forms
