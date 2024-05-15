@@ -186,6 +186,8 @@ SESSION_COOKIE_AGE = 31536000  # 1 year
 # gmail API settings
 EMAIL_FROM = ''
 GMAIL_USER = ''
+EMAIL_BACKEND = 'gmailapi_backend.service.GmailApiBackend'
+GMAIL_SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 GMAIL_SERVICE_ACCOUNT_JSON = ''
 GOOGLE_SERVICE_ACCOUNT = ''
 # system emails
