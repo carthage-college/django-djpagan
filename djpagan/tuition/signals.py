@@ -23,13 +23,15 @@ def remission_post_save_notify_approved(sender, **kwargs):
         subject = "[Tuition Remission] Approved: '{0}', {1}".format(
             remission.user.last_name, remission.user.first_name,
         )
+        frum = settings.SERVER_MAIL
         sent = send_mail(
             kwargs.get('request'),
             to_list,
             subject,
-            settings.SERVER_MAIL,
+            frum,
             'tuition/remission/email_approved.html',
             remission,
+            reply_to=[frum,],
             [settings.MANAGERS[0][1]],
         )
         if sent:

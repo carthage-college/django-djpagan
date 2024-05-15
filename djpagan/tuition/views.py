@@ -36,14 +36,16 @@ def remission(request):
             subject = "[Tuition Remission] Submission: {0}, {1}".format(
                 data.user.last_name, data.user.first_name,
             )
+            frum = settings.SERVER_MAIL
             sent = send_mail(
                 request,
                 to_list,
                 subject,
-                settings.SERVER_MAIL,
+                frum,
                 'tuition/remission/email.html',
                 data,
-                [settings.MANAGERS[0][1]],
+                reply_to=[frum,],
+                bcc = [settings.MANAGERS[0][1]],
             )
             return HttpResponseRedirect(reverse_lazy('remission_success'))
     else:
