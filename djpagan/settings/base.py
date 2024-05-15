@@ -75,6 +75,8 @@ INSTALLED_APPS = (
     'djpagan.forage',
     'djtools',
     'django_bootstrap5',
+    # gmail api for send mail
+    'gmailapi_backend',
     'imagekit',
     'taggit',
 )
@@ -181,13 +183,12 @@ SESSION_COOKIE_DOMAIN='.carthage.edu'
 SESSION_COOKIE_NAME ='django_djpagan_cookie'
 #SESSION_COOKIE_AGE = 86400
 SESSION_COOKIE_AGE = 31536000  # 1 year
-# SMTP settings
-EMAIL_HOST = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_FAIL_SILENTLY = False
+# gmail API settings
+EMAIL_FROM = ''
+GMAIL_USER = ''
+GMAIL_SERVICE_ACCOUNT_JSON = ''
+GOOGLE_SERVICE_ACCOUNT = ''
+# system emails
 DEFAULT_FROM_EMAIL = ''
 SERVER_EMAIL = ''
 SERVER_MAIL=''
