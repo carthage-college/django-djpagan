@@ -1,5 +1,5 @@
 cryptography
-django==4.2.11
+django==4.2.14
 django-appconf
 django-bootstrap5
 django-gmailapi-json-backend
