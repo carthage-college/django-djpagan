@@ -32,7 +32,7 @@ def remission_post_save_notify_approved(sender, **kwargs):
             'tuition/remission/email_approved.html',
             remission,
             reply_to=[frum,],
-            [settings.MANAGERS[0][1]],
+            bcc=[settings.MANAGERS[0][1],],
         )
         if sent:
             remission.approved_email = True
