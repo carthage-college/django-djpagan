@@ -53,20 +53,6 @@ urlpatterns = [
     ),
     # django admin and loginas
     path('rocinante/', admin.site.urls),
-    # billing search and reports
-    path('billing/', include('djpagan.billing.urls')),
-    # checks forms
-    path('czech/', include('djpagan.czech.urls')),
-    # fee report
-    path('fee/', include('djpagan.fee.urls')),
-    # financial aid
-    path('financial-aid/', include('djpagan.financialaid.urls')),
-    # meal plans
-    path('forage/', include('djpagan.forage.urls')),
-    # search students by various parameters
-    path('student/search/', views.search_students, name='search_students'),
-    # student detail view
-    path('student/<int:sid>/', views.student_detail, name='student_detail'),
     # tutition stuff
     path('tuition/', include('djpagan.tuition.urls')),
     # dashboard home

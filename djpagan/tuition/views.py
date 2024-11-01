@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from djauth.decorators import portal_auth_required
 from djpagan.tuition.forms import RemissionForm
 from djtools.utils.mail import send_mail
 
 
-@portal_auth_required(
-    session_var='DJPAGAN_AUTH',
-    redirect_url=reverse_lazy('access_denied')
-)
+@login_required
 def remission(request):
     """Tuition assistance form."""
     if request.method == 'POST':
